@@ -1,6 +1,4 @@
-using Tesseract.Contracts;
-
-namespace Vlad.Tesseract.Contracts;
+namespace Tesseract.Contracts;
 
 public interface ITesseractResultIterator : ITesseractPageIterator
 {

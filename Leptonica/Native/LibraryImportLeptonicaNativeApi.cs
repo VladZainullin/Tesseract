@@ -2,7 +2,6 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using Leptonica.Contracts;
-using Vlad.Leptonica.Native;
 
 namespace Leptonica.Native;
 

@@ -1,6 +1,5 @@
 using Leptonica.Native;
 using Microsoft.Win32.SafeHandles;
-using Vlad.Leptonica.Native;
 
 namespace Leptonica;
 

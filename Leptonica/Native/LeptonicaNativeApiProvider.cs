@@ -1,7 +1,6 @@
 using System.Diagnostics.CodeAnalysis;
-using Leptonica.Native;
 
-namespace Vlad.Leptonica.Native;
+namespace Leptonica.Native;
 
 internal static class LeptonicaNativeApiProvider
 {

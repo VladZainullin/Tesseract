@@ -1,7 +1,6 @@
 using System;
 using System.Runtime.InteropServices;
 using Tesseract.Contracts;
-using Vlad.Tesseract.Contracts;
 
 namespace Tesseract;
 

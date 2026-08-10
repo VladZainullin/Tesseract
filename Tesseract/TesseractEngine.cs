@@ -4,7 +4,6 @@ using System.Runtime.InteropServices;
 using Leptonica;
 using Leptonica.Contracts;
 using Tesseract.Contracts;
-using Vlad.Tesseract.Contracts;
 
 namespace Tesseract;
 

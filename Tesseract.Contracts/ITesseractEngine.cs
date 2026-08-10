@@ -1,5 +1,4 @@
 ﻿using Leptonica.Contracts;
-using Vlad.Tesseract.Contracts;
 
 namespace Tesseract.Contracts;
 

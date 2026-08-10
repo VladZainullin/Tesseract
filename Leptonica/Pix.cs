@@ -1,6 +1,5 @@
 using Leptonica.Contracts;
 using Leptonica.Native;
-using Vlad.Leptonica.Native;
 
 namespace Leptonica;
 

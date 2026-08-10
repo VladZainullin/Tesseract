@@ -1,7 +1,7 @@
 using System.Reflection;
 using System.Runtime.InteropServices;
 
-namespace Vlad.Leptonica.Native;
+namespace Leptonica.Native;
 
 internal static class LeptonicaNativeLibrary
 {

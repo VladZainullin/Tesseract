@@ -1,4 +1,5 @@
-﻿using System.Runtime.CompilerServices;
+﻿using System;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
 using Tesseract.Contracts;
@@ -7,7 +8,33 @@ namespace Tesseract;
 
 internal static partial class TesseractNative
 {
-    private const string LibraryName = "/opt/homebrew/lib/libtesseract.5.dylib";
+    private static nint _handle;
+    private const string LibraryName = "tesseract";
+
+    private static readonly object Lock = new();
+
+    static TesseractNative()
+    {
+        NativeLibrary.SetDllImportResolver(typeof(TesseractNative).Assembly, (libraryName, assembly, searchPath) =>
+        {
+            if (!string.Equals(libraryName, LibraryName, StringComparison.Ordinal)) return nint.Zero;
+            lock (Lock)
+            {
+                if (_handle != nint.Zero) return _handle;
+
+                var libraryPath = Environment.GetEnvironmentVariable("TESSERACT_LIBRARY_PATH");
+                if (libraryPath == null) throw new InvalidOperationException("TESSERACT_LIBRARY_PATH is not set");
+
+                if (NativeLibrary.TryLoad(libraryPath, out var handle))
+                {
+                    _handle = handle;
+                    return handle;
+                }
+                
+                throw new InvalidOperationException("TESSERACT_LIBRARY_PATH is not valid");
+            }
+        });
+    }
 
     [LibraryImport(LibraryName, EntryPoint = "TessVersion", StringMarshalling = StringMarshalling.Utf8)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]

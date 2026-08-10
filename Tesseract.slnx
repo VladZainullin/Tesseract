@@ -6,6 +6,11 @@
     <File Path="global.json" />
     <File Path="NuGet.config" />
   </Folder>
-  <Folder Name="/src/" />
+  <Folder Name="/src/">
+    <Project Path="Leptonica.Contracts/Leptonica.Contracts.csproj" />
+    <Project Path="Leptonica/Leptonica.csproj" />
+    <Project Path="Tesseract.Contracts/Tesseract.Contracts.csproj" />
+    <Project Path="Tesseract/Tesseract.csproj" />
+  </Folder>
   <Folder Name="/tests/" />
 </Solution>

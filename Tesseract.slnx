@@ -12,5 +12,7 @@
     <Project Path="Tesseract.Contracts/Tesseract.Contracts.csproj" />
     <Project Path="Tesseract/Tesseract.csproj" />
   </Folder>
-  <Folder Name="/tests/" />
+  <Folder Name="/tests/">
+    <Project Path="tests/Tesseract.Tests/Tesseract.Tests.csproj" />
+  </Folder>
 </Solution>

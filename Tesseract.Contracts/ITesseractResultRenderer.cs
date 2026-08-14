@@ -2,6 +2,7 @@ namespace Tesseract.Contracts;
 
 public interface ITesseractResultRenderer
 {
+    nint Handle { get; }
     string Extension { get; }
     
     string Title { get; }

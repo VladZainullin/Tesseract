@@ -7,7 +7,7 @@ using Tesseract.Contracts;
 
 namespace Tesseract;
 
-internal sealed class TesseractEngine : IDisposable, ITesseractEngine
+public sealed class TesseractEngine : IDisposable, ITesseractEngine
 {
     private bool _disposed;
 

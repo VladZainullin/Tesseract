@@ -3,12 +3,12 @@ using Tesseract.Contracts;
 
 namespace Tesseract;
 
-public sealed class TesseractResultResultRenderer : ITesseractResultRenderer, IDisposable
+public sealed class TesseractResultRenderer : ITesseractResultRenderer, IDisposable
 {
     private readonly nint _handle;
     private bool _disposed;
 
-    public TesseractResultResultRenderer(nint handle)
+    public TesseractResultRenderer(nint handle)
     {
         _handle = handle;
     }
@@ -44,7 +44,7 @@ public sealed class TesseractResultResultRenderer : ITesseractResultRenderer, ID
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
         var rendererPtr = TesseractNative.TessResultRendererNext(_handle);
-        return new TesseractResultResultRenderer(rendererPtr);
+        return new TesseractResultRenderer(rendererPtr);
     }
 
     public void Insert(ITesseractResultRenderer renderer)

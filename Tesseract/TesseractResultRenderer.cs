@@ -9,6 +9,7 @@ public sealed class TesseractResultRenderer : ITesseractResultRenderer, IDisposa
 
     public TesseractResultRenderer(nint handle)
     {
+        if (handle <= 0) throw new ArgumentOutOfRangeException(nameof(handle));
         Handle = handle;
     }
     

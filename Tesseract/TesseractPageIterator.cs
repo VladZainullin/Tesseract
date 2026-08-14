@@ -12,7 +12,7 @@ public class TesseractPageIterator : ITesseractPageIterator
 
     public TesseractPageIterator(nint handle, bool ownsHandle)
     {
-        if (handle == 0) throw new ArgumentException("Native iterator handle cannot be null.", nameof(handle));
+        if (handle <= 0) throw new ArgumentOutOfRangeException(nameof(handle));
         
         _ownsHandle = ownsHandle;
         Handle = handle;

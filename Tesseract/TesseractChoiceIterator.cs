@@ -10,6 +10,7 @@ public sealed class TesseractChoiceIterator : IDisposable, ITesseractChoiceItera
 
     public TesseractChoiceIterator(nint handle)
     {
+        if (handle <= 0) throw new ArgumentOutOfRangeException(nameof(handle));
         _iterator = handle;
     }
 

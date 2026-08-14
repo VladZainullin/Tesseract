@@ -42,6 +42,7 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
 
     public ITesseractResultRenderer HOcrRendererCreate(string outputName, bool fontInfo)
     {
+        ArgumentException.ThrowIfNullOrEmpty(outputName);
         ObjectDisposedException.ThrowIf(_disposed, this);
         var rendererPtr = TesseractNative.TessHOcrRendererCreate2(outputName, fontInfo);
         return new TesseractResultRenderer(rendererPtr);
@@ -49,6 +50,7 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
 
     public ITesseractResultRenderer AltoRendererCreate(string outputName)
     {
+        ArgumentException.ThrowIfNullOrEmpty(outputName);
         ObjectDisposedException.ThrowIf(_disposed, this);
         var rendererPtr = TesseractNative.TessAltoRendererCreate(outputName);
         return new TesseractResultRenderer(rendererPtr);
@@ -56,6 +58,7 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
 
     public ITesseractResultRenderer TsvRendererCreate(string outputName)
     {
+        ArgumentException.ThrowIfNullOrEmpty(outputName);
         ObjectDisposedException.ThrowIf(_disposed, this);
         var rendererPtr = TesseractNative.TessTsvRendererCreate(outputName);
         return new TesseractResultRenderer(rendererPtr);
@@ -63,6 +66,8 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
 
     public ITesseractResultRenderer PdfRendererCreate(string outputName, string dataDir, bool textOnly)
     {
+        ArgumentException.ThrowIfNullOrEmpty(outputName);
+        ArgumentException.ThrowIfNullOrEmpty(dataDir);
         ObjectDisposedException.ThrowIf(_disposed, this);
         var rendererPtr = TesseractNative.TessPdfRendererCreate(outputName, dataDir, textOnly);
         return new TesseractResultRenderer(rendererPtr);
@@ -135,7 +140,7 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
     public ITesseractResultRenderer UnlvRendererCreate(string outputName)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-        ArgumentNullException.ThrowIfNull(outputName);
+        ArgumentException.ThrowIfNullOrEmpty(outputName);
         var rendererPtr = TesseractNative.TessUnlvRendererCreate(outputName);
         return new TesseractResultRenderer(rendererPtr);
     }
@@ -143,7 +148,7 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
     public ITesseractResultRenderer BoxTextRendererCreate(string outputName)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-        ArgumentNullException.ThrowIfNull(outputName);
+        ArgumentException.ThrowIfNullOrEmpty(outputName);
         var rendererPtr = TesseractNative.TessBoxTextRendererCreate(outputName);
         return new TesseractResultRenderer(rendererPtr);
     }
@@ -151,7 +156,7 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
     public ITesseractResultRenderer WordStrBoxRendererCreate(string outputName)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-        ArgumentNullException.ThrowIfNull(outputName);
+        ArgumentException.ThrowIfNullOrEmpty(outputName);
         var rendererPtr = TesseractNative.TessWordStrBoxRendererCreate(outputName);
         return new TesseractResultRenderer(rendererPtr);
     }
@@ -159,7 +164,7 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
     public ITesseractResultRenderer LstmBoxRendererCreate(string outputName)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-        ArgumentNullException.ThrowIfNull(outputName);
+        ArgumentException.ThrowIfNullOrEmpty(outputName);
         var rendererPtr = TesseractNative.TessLstmBoxRendererCreate(outputName);
         return new TesseractResultRenderer(rendererPtr);
     }
@@ -167,7 +172,7 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
     public void SetVariable(string name, string value)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-        ArgumentNullException.ThrowIfNull(name);
+        ArgumentException.ThrowIfNullOrEmpty(name);
         ArgumentNullException.ThrowIfNull(value);
         TesseractNative.TessBaseApiSetVariable(Handle, name, value);
     }
@@ -175,7 +180,7 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
     public void SetDebugVariable(string name, string value)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-        ArgumentNullException.ThrowIfNull(name);
+        ArgumentException.ThrowIfNullOrEmpty(name);
         ArgumentNullException.ThrowIfNull(value);
         TesseractNative.TessBaseApiSetDebugVariable(Handle, name, value);
     }
@@ -190,14 +195,14 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
     public string GetVariable(string name)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-        ArgumentNullException.ThrowIfNull(name);
+        ArgumentException.ThrowIfNullOrEmpty(name);
         return TesseractNative.TessBaseApiGetStringVariable(Handle, name);
     }
 
     public bool TryGetVariable(string name, out int? value)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-        ArgumentNullException.ThrowIfNull(name);
+        ArgumentException.ThrowIfNullOrEmpty(name);
         if (TesseractNative.TessBaseApiGetIntVariable(Handle, name, out var nativeValue))
         {
             value = nativeValue;
@@ -211,7 +216,7 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
     public bool TryGetVariable(string name, out double? value)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-        ArgumentNullException.ThrowIfNull(name);
+        ArgumentException.ThrowIfNullOrEmpty(name);
         if (TesseractNative.TessBaseApiGetDoubleVariable(Handle, name, out var nativeValue))
         {
             value = nativeValue;
@@ -225,7 +230,7 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
     public bool TryGetVariable(string name, out bool? value)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-        ArgumentNullException.ThrowIfNull(name);
+        ArgumentException.ThrowIfNullOrEmpty(name);
         if (TesseractNative.TessBaseApiGetBoolVariable(Handle, name, out var v))
         {
             value = v;
@@ -239,7 +244,7 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
     public void SetInputName(string name)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-        ArgumentNullException.ThrowIfNull(name);
+        ArgumentException.ThrowIfNullOrEmpty(name);
         TesseractNative.TessBaseApiSetInputName(Handle, name);
     }
 
@@ -357,7 +362,7 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
     public bool TryInitialization(string dataPath, string language)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-        ArgumentNullException.ThrowIfNull(dataPath);
+        ArgumentException.ThrowIfNullOrEmpty(dataPath);
         ArgumentNullException.ThrowIfNull(language);
         return TesseractNative.TessBaseApiInit3(Handle, dataPath, language) != 0;
     }
@@ -377,8 +382,8 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
     public bool TryInitialization(string dataPath, string language, OcrEngineMode oem)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-        ArgumentNullException.ThrowIfNull(dataPath);
-        ArgumentNullException.ThrowIfNull(language);
+        ArgumentException.ThrowIfNullOrEmpty(dataPath);
+        ArgumentException.ThrowIfNullOrEmpty(language);
         return TesseractNative.TessBaseApiInit2(Handle, dataPath, language, oem) == 0;
     }
 

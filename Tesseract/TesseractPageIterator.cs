@@ -8,6 +8,7 @@ namespace Tesseract;
 public class TesseractPageIterator : ITesseractPageIterator
 {
     private readonly bool _ownsHandle;
+    private volatile bool _disposed;
 
     public TesseractPageIterator(nint handle, bool ownsHandle)
     {
@@ -19,7 +20,7 @@ public class TesseractPageIterator : ITesseractPageIterator
 
     public nint Handle { get; private set; }
 
-    protected bool Disposed { get; private set; }
+    protected bool Disposed => _disposed;
 
     public void Begin()
     {
@@ -112,26 +113,32 @@ public class TesseractPageIterator : ITesseractPageIterator
             : new TesseractPageIterator(pageIteratorPtr, true);
     }
 
-    protected virtual void ReleaseHandle(nint handle)
+    protected virtual void Dispose(bool _)
     {
-        TesseractNative.TessPageIteratorDelete(handle);
+        if (Disposed) return;
+
+        if (_ownsHandle && Handle != nint.Zero)
+        {
+            ReleaseHandle();
+            Handle = nint.Zero;
+        }
+        
+        _disposed = true;
+    }
+
+    protected virtual void ReleaseHandle()
+    {
+        TesseractNative.TessPageIteratorDelete(Handle);
     }
 
     public void Dispose()
     {
-        if (Disposed)
-            return;
-
-        Disposed = true;
-
-        var handle = Handle;
-        Handle = 0;
-
-        if (_ownsHandle && handle != 0)
-        {
-            ReleaseHandle(handle);
-        }
-
+        Dispose(true);
         GC.SuppressFinalize(this);
+    }
+    
+    ~TesseractPageIterator()
+    {
+        Dispose(false);
     }
 }

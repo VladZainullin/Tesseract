@@ -121,9 +121,9 @@ public sealed class TesseractResultIterator
         ObjectDisposedException.ThrowIf(Disposed, this);
         return TesseractNative.TessResultIteratorSymbolIsDropcap(Handle);
     }
-    
-    protected override void ReleaseHandle(nint handle)
+
+    protected override void ReleaseHandle()
     {
-        TesseractNative.TessResultIteratorDelete(handle);
+        TesseractNative.TessResultIteratorDelete(Handle);
     }
 }

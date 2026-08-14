@@ -358,13 +358,21 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
         ObjectDisposedException.ThrowIf(_disposed, this);
         TesseractNative.TessBaseApiSetPageSegMode(Handle, mode);
     }
+    
+    public bool TryInitialization(string dataPath, string language, OcrEngineMode oem)
+    {
+        ObjectDisposedException.ThrowIf(_disposed, this);
+        ArgumentException.ThrowIfNullOrEmpty(dataPath);
+        ArgumentException.ThrowIfNullOrEmpty(language);
+        return TesseractNative.TessBaseApiInit2(Handle, dataPath, language, oem) == 0;
+    }
 
     public bool TryInitialization(string dataPath, string language)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
         ArgumentException.ThrowIfNullOrEmpty(dataPath);
         ArgumentNullException.ThrowIfNull(language);
-        return TesseractNative.TessBaseApiInit3(Handle, dataPath, language) != 0;
+        return TesseractNative.TessBaseApiInit3(Handle, dataPath, language) == 0;
     }
 
     public int GetSourceYResolution()
@@ -379,14 +387,6 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
         TesseractNative.TessBaseApiSetSourceResolution(Handle, ppi);
     }
 
-    public bool TryInitialization(string dataPath, string language, OcrEngineMode oem)
-    {
-        ObjectDisposedException.ThrowIf(_disposed, this);
-        ArgumentException.ThrowIfNullOrEmpty(dataPath);
-        ArgumentException.ThrowIfNullOrEmpty(language);
-        return TesseractNative.TessBaseApiInit2(Handle, dataPath, language, oem) == 0;
-    }
-
     public void SetImage(IPix image)
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
@@ -398,7 +398,7 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
         ArgumentNullException.ThrowIfNull(monitor);
-        return TesseractNative.TessBaseApiRecognize(Handle, monitor.Handle) != 0;
+        return TesseractNative.TessBaseApiRecognize(Handle, monitor.Handle) == 0;
     }
 
     public void SetRectangle(int left, int top, int width, int height)

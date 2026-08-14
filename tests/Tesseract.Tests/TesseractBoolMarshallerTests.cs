@@ -1,6 +1,6 @@
 namespace Tesseract.Tests;
 
-public sealed class TesseractBoolMarshallerTests
+internal sealed class TesseractBoolMarshallerTests
 {
     [Test]
     public async Task ConvertToManagedReturnsFalseForZero()

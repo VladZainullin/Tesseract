@@ -11,7 +11,7 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
 {
     private volatile bool _disposed;
 
-    public nint Handle { get; } = TesseractNative.TessBaseApiCreate();
+    public SafeHandle Handle { get; } = new TesseractEngineSafeHandle(TesseractNative.TessBaseApiCreate(), true);
 
     public static string Version => TesseractNative.TessVersion();
 
@@ -486,11 +486,7 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
     {
         if (_disposed) return;
 
-        if (Handle != IntPtr.Zero)
-        {
-            TesseractNative.TessBaseApiDelete(Handle);
-        }
-
+        Handle.Dispose();
         _disposed = true;
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using Tesseract.Contracts;
 
 namespace Tesseract;
@@ -66,6 +67,7 @@ public sealed class TesseractResultRenderer : ITesseractResultRenderer, IDisposa
     {
         ArgumentNullException.ThrowIfNull(engine);
         ObjectDisposedException.ThrowIf(_disposed, this);
+        
         return TesseractNative.TessResultRendererAddImage(Handle, engine.Handle);
     }
 

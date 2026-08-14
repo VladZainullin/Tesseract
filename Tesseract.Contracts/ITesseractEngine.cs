@@ -2,14 +2,13 @@
 
 namespace Tesseract.Contracts;
 
-public interface ITesseractEngine
+public interface ITesseractEngine : IHasSafeHandle
 {
     static abstract string Version { get; }
     
     PageSegmentationMode PageSegmentationMode { get; }
     string InputName { get; }
     
-    nint Handle { get; }
     string? Text { get; }
     float MeanTextConfidence { get; }
     void SetVariable(string name, string value);

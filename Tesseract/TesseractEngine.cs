@@ -9,7 +9,7 @@ namespace Tesseract;
 
 public sealed class TesseractEngine : IDisposable, ITesseractEngine
 {
-    private bool _disposed;
+    private volatile bool _disposed;
 
     public nint Handle { get; } = TesseractNative.TessBaseApiCreate();
 

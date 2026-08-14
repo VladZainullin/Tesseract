@@ -6,7 +6,7 @@ namespace Tesseract;
 public sealed class TesseractChoiceIterator : IDisposable, ITesseractChoiceIterator
 {
     private readonly nint _iterator;
-    private bool _disposed;
+    private volatile bool _disposed;
 
     public TesseractChoiceIterator(nint handle)
     {

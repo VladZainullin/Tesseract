@@ -5,7 +5,7 @@ namespace Tesseract;
 
 public sealed class TesseractResultRenderer : ITesseractResultRenderer, IDisposable
 {
-    private bool _disposed;
+    private volatile bool _disposed;
 
     public TesseractResultRenderer(nint handle)
     {

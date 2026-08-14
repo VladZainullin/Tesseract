@@ -13,7 +13,7 @@ public interface ITesseractPageIterator : IDisposable
     void GetParagraphInfo(
         out ParagraphJustification justification, out bool isListItem, out bool isCrown, out int firstLineIndent);
 
-    void GetOrientation(out OrientationPage orientation, out WritingDirection writingDirection,
+    void GetOrientation(out PageOrientation pageOrientation, out WritingDirection writingDirection,
         out TextLineOrder textLineOrder, out float deskewAngle);
     void Begin();
     bool TryNext(PageIteratorLevel level);

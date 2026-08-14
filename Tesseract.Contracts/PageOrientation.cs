@@ -1,6 +1,6 @@
 ﻿namespace Tesseract.Contracts;
 
-public enum OrientationPage
+public enum PageOrientation
 {
     Up = 0,
     Right = 1,

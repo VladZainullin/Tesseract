@@ -599,7 +599,7 @@ internal static partial class TesseractNative
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial void TessPageIteratorOrientation(
         nint iterator,
-        out OrientationPage orientation,
+        out PageOrientation pageOrientation,
         out WritingDirection writingDirection,
         out TextLineOrder textLineOrder,
         out float deskewAngle);

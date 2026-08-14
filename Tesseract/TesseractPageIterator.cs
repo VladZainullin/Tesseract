@@ -28,11 +28,11 @@ public class TesseractPageIterator : ITesseractPageIterator
         TesseractNative.TessPageIteratorBegin(Handle);
     }
 
-    public void GetOrientation(out OrientationPage orientation, out WritingDirection writingDirection,
+    public void GetOrientation(out PageOrientation pageOrientation, out WritingDirection writingDirection,
         out TextLineOrder textLineOrder, out float deskewAngle)
     {
         ObjectDisposedException.ThrowIf(Disposed, this);
-        TesseractNative.TessPageIteratorOrientation(Handle, out orientation, out writingDirection, out textLineOrder
+        TesseractNative.TessPageIteratorOrientation(Handle, out pageOrientation, out writingDirection, out textLineOrder
             , out deskewAngle);
     }
 

@@ -1,10 +1,11 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
     <PropertyGroup>
         <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
         <ImplicitUsings>disable</ImplicitUsings>
     </PropertyGroup>
-
+    <ItemGroup>
+        <InternalsVisibleTo Include="Tesseract.Tests" />
+    </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\Leptonica\Leptonica.csproj" />
       <ProjectReference Include="..\Tesseract.Contracts\Tesseract.Contracts.csproj" />

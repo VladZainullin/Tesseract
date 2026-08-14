@@ -6,6 +6,7 @@ namespace Leptonica.Native;
 internal static class LeptonicaNativeLibrary
 {
     internal const string LogicalName = "leptonica";
+    internal const DllImportSearchPath DefaultDllImportSearchPath = DllImportSearchPath.SafeDirectories;
 
     internal static nint Resolve(
         string libraryName,

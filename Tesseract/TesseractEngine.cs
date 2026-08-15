@@ -373,7 +373,7 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
     public ITesseractPageIterator AnalyzeLayout()
     {
         var iterator = TesseractNative.TessBaseApiAnalyseLayout(Handle);
-        return new TesseractPageIterator(new TesseractResultIteratorSafeHandle(iterator, false));
+        return new TesseractPageIterator(new TesseractResultIteratorSafeHandle(iterator, true));
     }
 
     public bool TryGetTextDirection(out int outOffset, out float slope)

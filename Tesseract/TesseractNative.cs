@@ -709,24 +709,24 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessChoiceIteratorDelete")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void TessChoiceIteratorDelete(nint choiceIterator);
+    public static partial void TessChoiceIteratorDelete(SafeHandle choiceIterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessChoiceIteratorNext")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(TesseractBoolMarshaller))]
-    public static partial bool TessChoiceIteratorNext(nint choiceIterator);
+    public static partial bool TessChoiceIteratorNext(SafeHandle choiceIterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessChoiceIteratorGetUTF8Text",
         StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string TessChoiceIteratorGetUtf8Text(nint choiceIterator);
+    public static partial string TessChoiceIteratorGetUtf8Text(SafeHandle choiceIterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessChoiceIteratorConfidence")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial float TessChoiceIteratorConfidence(nint choiceIterator);
+    public static partial float TessChoiceIteratorConfidence(SafeHandle choiceIterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessMonitorCreate")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]

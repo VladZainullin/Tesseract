@@ -5,37 +5,36 @@ namespace Tesseract;
 
 public sealed class TesseractChoiceIterator : IDisposable, ITesseractChoiceIterator
 {
-    private readonly nint _iterator;
+    private readonly TesseractChoiceIteratorSafeHandle _handle;
     private volatile bool _disposed;
 
     public TesseractChoiceIterator(nint handle)
     {
-        if (handle <= 0) throw new ArgumentOutOfRangeException(nameof(handle));
-        _iterator = handle;
+        _handle = new TesseractChoiceIteratorSafeHandle(handle, true);
     }
 
     public bool TryNext()
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-        return TesseractNative.TessChoiceIteratorNext(_iterator);
+        return TesseractNative.TessChoiceIteratorNext(_handle);
     }
 
     public string GetText()
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-        return TesseractNative.TessChoiceIteratorGetUtf8Text(_iterator);
+        return TesseractNative.TessChoiceIteratorGetUtf8Text(_handle);
     }
 
     public float GetConfidence()
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
-        return TesseractNative.TessChoiceIteratorConfidence(_iterator);
+        return TesseractNative.TessChoiceIteratorConfidence(_handle);
     }
 
     public void Dispose()
     {
         if (_disposed) return;
         _disposed = true;
-        TesseractNative.TessChoiceIteratorDelete(_iterator);
+        _handle.Dispose();
     }
 }

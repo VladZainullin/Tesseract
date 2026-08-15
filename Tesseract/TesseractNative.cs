@@ -412,7 +412,7 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIAnalyseLayout")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial TesseractResultIteratorSafeHandle TessBaseApiAnalyseLayout(SafeHandle handle);
+    public static partial TesseractPageIteratorSafeHandle TessBaseApiAnalyseLayout(SafeHandle handle);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIRecognize")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]

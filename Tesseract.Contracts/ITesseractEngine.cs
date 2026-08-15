@@ -48,8 +48,8 @@ public interface ITesseractEngine : IHasSafeHandle
     string? GetBoxText(int pageNumber);
     string? GetUniChar(int uniCharId);
     void SetSegmentationMode(PageSegmentationMode mode);
-    bool TryInitialization(string dataPath, string language);
-    bool TryInitialization(string dataPath, string language, OcrEngineMode oem);
+    bool TryInitialize(string dataPath, string language);
+    bool TryInitialize(string dataPath, string language, OcrEngineMode oem);
     int GetSourceYResolution();
     void SetSourceResolution(int ppi);
     void SetImage(IPix image);

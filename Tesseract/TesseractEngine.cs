@@ -305,14 +305,14 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
         TesseractNative.TessBaseApiSetPageSegMode(Handle, mode);
     }
     
-    public bool TryInitialization(string dataPath, string language, OcrEngineMode oem)
+    public bool TryInitialize(string dataPath, string language, OcrEngineMode oem)
     {
         ArgumentException.ThrowIfNullOrEmpty(dataPath);
         ArgumentException.ThrowIfNullOrEmpty(language);
         return TesseractNative.TessBaseApiInit2(Handle, dataPath, language, oem) == 0;
     }
 
-    public bool TryInitialization(string dataPath, string language)
+    public bool TryInitialize(string dataPath, string language)
     {
         ArgumentException.ThrowIfNullOrEmpty(dataPath);
         ArgumentNullException.ThrowIfNull(language);

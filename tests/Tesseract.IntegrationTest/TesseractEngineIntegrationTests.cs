@@ -59,9 +59,12 @@ internal sealed class TesseractEngineIntegrationTests
         engine.SetImage(TestImage.Create(), TestImage.Width, TestImage.Height, 1);
         engine.SetSourceResolution(300);
 
-        var recognized = engine.TryRecognize(NullMonitor.Instance);
+        using var monitor = new TesseractMonitor();
+        var recognized = engine.TryRecognize(monitor);
 
         await Assert.That(recognized).IsTrue();
+        await Assert.That(monitor.Progress).IsGreaterThanOrEqualTo(0);
+        await Assert.That(monitor.Progress).IsLessThanOrEqualTo(100);
         await Assert.That(engine.Text).IsNotNull();
         await Assert.That(engine.MeanTextConfidence).IsGreaterThanOrEqualTo(0);
         await Assert.That(engine.MeanTextConfidence).IsLessThanOrEqualTo(100);
@@ -77,7 +80,8 @@ internal sealed class TesseractEngineIntegrationTests
         await Assert.That(engine.TryInitialize(dataPath, "eng", OcrEngineMode.LstmOnly)).IsTrue();
         engine.SetSegmentationMode(PageSegmentationMode.SingleLine);
         engine.SetImage(TestImage.Create(), TestImage.Width, TestImage.Height, 1);
-        await Assert.That(engine.TryRecognize(NullMonitor.Instance)).IsTrue();
+        using var monitor = new TesseractMonitor();
+        await Assert.That(engine.TryRecognize(monitor)).IsTrue();
 
         using var iterator = engine.GetIterator();
         iterator.Begin();
@@ -97,9 +101,4 @@ internal sealed class TesseractEngineIntegrationTests
         await Assert.That(copy.Handle.IsInvalid).IsFalse();
     }
 
-    private sealed class NullMonitor : ITesseractMonitor
-    {
-        public static NullMonitor Instance { get; } = new();
-        public nint Handle => nint.Zero;
-    }
 }

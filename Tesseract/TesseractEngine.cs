@@ -36,21 +36,21 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
         return new TesseractResultRenderer(rendererPtr);
     }
 
-    public ITesseractResultRenderer AltoRendererCreate(string outputName)
+    public ITesseractResultRenderer CreateAltoRenderer(string outputName)
     {
         ArgumentException.ThrowIfNullOrEmpty(outputName);
         var rendererPtr = TesseractNative.TessAltoRendererCreate(outputName);
         return new TesseractResultRenderer(rendererPtr);
     }
 
-    public ITesseractResultRenderer TsvRendererCreate(string outputName)
+    public ITesseractResultRenderer CreateTsvRenderer(string outputName)
     {
         ArgumentException.ThrowIfNullOrEmpty(outputName);
         var rendererPtr = TesseractNative.TessTsvRendererCreate(outputName);
         return new TesseractResultRenderer(rendererPtr);
     }
 
-    public ITesseractResultRenderer PdfRendererCreate(string outputName, string dataDir, bool textOnly)
+    public ITesseractResultRenderer CreatePdfRenderer(string outputName, string dataDir, bool textOnly)
     {
         ArgumentException.ThrowIfNullOrEmpty(outputName);
         ArgumentException.ThrowIfNullOrEmpty(dataDir);
@@ -116,28 +116,28 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
         }
     }
 
-    public ITesseractResultRenderer UnlvRendererCreate(string outputName)
+    public ITesseractResultRenderer CreateUnlvRenderer(string outputName)
     {
         ArgumentException.ThrowIfNullOrEmpty(outputName);
         var rendererPtr = TesseractNative.TessUnlvRendererCreate(outputName);
         return new TesseractResultRenderer(rendererPtr);
     }
 
-    public ITesseractResultRenderer BoxTextRendererCreate(string outputName)
+    public ITesseractResultRenderer CreateBoxTextRenderer(string outputName)
     {
         ArgumentException.ThrowIfNullOrEmpty(outputName);
         var rendererPtr = TesseractNative.TessBoxTextRendererCreate(outputName);
         return new TesseractResultRenderer(rendererPtr);
     }
 
-    public ITesseractResultRenderer WordStrBoxRendererCreate(string outputName)
+    public ITesseractResultRenderer CreateWordStrBoxRenderer(string outputName)
     {
         ArgumentException.ThrowIfNullOrEmpty(outputName);
         var rendererPtr = TesseractNative.TessWordStrBoxRendererCreate(outputName);
         return new TesseractResultRenderer(rendererPtr);
     }
 
-    public ITesseractResultRenderer LstmBoxRendererCreate(string outputName)
+    public ITesseractResultRenderer CreateLstmBoxRenderer(string outputName)
     {
         ArgumentException.ThrowIfNullOrEmpty(outputName);
         var rendererPtr = TesseractNative.TessLstmBoxRendererCreate(outputName);

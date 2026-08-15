@@ -26,21 +26,21 @@ public interface ITesseractEngine : IHasSafeHandle
 
     ITesseractResultRenderer HOcrRendererCreate(string outputName, bool fontInfo);
 
-    ITesseractResultRenderer AltoRendererCreate(string outputName);
+    ITesseractResultRenderer CreateAltoRenderer(string outputName);
 
-    ITesseractResultRenderer TsvRendererCreate(string outputName);
+    ITesseractResultRenderer CreateTsvRenderer(string outputName);
 
-    ITesseractResultRenderer PdfRendererCreate(string outputName, string dataDir, bool textOnly);
+    ITesseractResultRenderer CreatePdfRenderer(string outputName, string dataDir, bool textOnly);
 
     IReadOnlyList<string> GetLoadedLanguages();
 
-    ITesseractResultRenderer UnlvRendererCreate(string outputName);
+    ITesseractResultRenderer CreateUnlvRenderer(string outputName);
 
-    ITesseractResultRenderer BoxTextRendererCreate(string outputName);
+    ITesseractResultRenderer CreateBoxTextRenderer(string outputName);
 
-    ITesseractResultRenderer WordStrBoxRendererCreate(string outputName);
+    ITesseractResultRenderer CreateWordStrBoxRenderer(string outputName);
 
-    ITesseractResultRenderer LstmBoxRendererCreate(string outputName);
+    ITesseractResultRenderer CreateLstmBoxRenderer(string outputName);
     string? GetHOcrText(int pageNumber);
     string? GetAltoText(int pageNumber);
     string? GetTsvText(int pageNumber);

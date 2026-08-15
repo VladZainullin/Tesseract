@@ -215,7 +215,7 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
         TesseractNative.TessBaseApiSetInputName(Handle, name);
     }
 
-    public string InputName => TesseractNative.TessBaseApiGetInputName(Handle);
+    public string? InputName => TesseractNative.TessBaseApiGetInputName(Handle);
 
     public string? Text
     {

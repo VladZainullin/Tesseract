@@ -177,7 +177,7 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIGetInputName", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string TessBaseApiGetInputName(SafeHandle handle);
+    public static partial string? TessBaseApiGetInputName(SafeHandle handle);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPISetInputImage")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]

@@ -7,7 +7,7 @@ public interface ITesseractEngine : IHasSafeHandle
     static abstract string Version { get; }
     
     PageSegmentationMode PageSegmentationMode { get; }
-    string InputName { get; }
+    string? InputName { get; }
     
     string? Text { get; }
     float MeanTextConfidence { get; }

@@ -1,9 +1,15 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
+        <TargetFramework />
         <TargetFrameworks>net7.0;net8.0;net9.0;net10.0</TargetFrameworks>
+        <AssemblyName>Tesseract.IntegrationTests</AssemblyName>
+        <RootNamespace>Tesseract.IntegrationTests</RootNamespace>
         <IsPackable>false</IsPackable>
     </PropertyGroup>
     <ItemGroup>
       <PackageReference Include="TUnit" />
+    </ItemGroup>
+    <ItemGroup>
+      <ProjectReference Include="../../Tesseract/Tesseract.csproj" />
     </ItemGroup>
 </Project>

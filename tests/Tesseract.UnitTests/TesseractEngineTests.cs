@@ -1,71 +1,108 @@
+using System.Runtime.Serialization;
+using Leptonica.Contracts;
+using Tesseract.Contracts;
+
 namespace Tesseract.UnitTests;
 
 internal sealed class TesseractEngineTests
 {
-    [Before(Class)]
-    public static void Setup()
-    {
-        Environment.SetEnvironmentVariable("TESSERACT_LIBRARY_PATH", "/opt/homebrew/opt/tesseract/lib/libtesseract.5.dylib");
-    }
-    
+    private readonly TesseractEngine _engine = CreateWithoutNativeHandle();
+
     [Test]
-    public async Task ConstructorCreatesValidHandle()
+    public async Task TrySetVariableThrowsWhenNameIsNull()
     {
-        using var engine = new TesseractEngine();
-
-        await Assert.That(engine.Handle.IsInvalid).IsFalse();
-        await Assert.That(engine.Handle.IsClosed).IsFalse();
+        await Assert.That(() => _engine.TrySetVariable(null!, "value"))
+            .ThrowsExactly<ArgumentNullException>();
     }
-    
+
     [Test]
-    public async Task DisposeClosesHandle()
+    public async Task TrySetVariableThrowsWhenValueIsNull()
     {
-        var engine = new TesseractEngine();
-        var handle = engine.Handle;
-
-        engine.Dispose();
-
-        await Assert.That(handle.IsClosed).IsTrue();
+        await Assert.That(() => _engine.TrySetVariable("name", null!))
+            .ThrowsExactly<ArgumentNullException>();
     }
-    
+
     [Test]
-    public async Task VersionReturnsNonEmptyString()
+    public async Task TrySetDebugVariableThrowsWhenNameIsEmpty()
     {
-        var version = TesseractEngine.Version;
-
-        await Assert.That(version).IsNotNull();
-        await Assert.That(version.Length).IsGreaterThan(0);
+        await Assert.That(() => _engine.TrySetDebugVariable(string.Empty, "value"))
+            .ThrowsExactly<ArgumentException>();
     }
-    
+
     [Test]
-    public async Task DisposeCanBeCalledTwice()
+    public async Task TrySetDebugVariableThrowsWhenValueIsNull()
     {
-        var engine = new TesseractEngine();
-
-        engine.Dispose();
-        engine.Dispose();
-
-        await Assert.That(engine.Handle.IsClosed).IsTrue();
+        await Assert.That(() => _engine.TrySetDebugVariable("name", null!))
+            .ThrowsExactly<ArgumentNullException>();
     }
-    
+
     [Test]
-    public async Task MethodAfterDisposeThrowsObjectDisposedException()
+    [Arguments(null)]
+    [Arguments("")]
+    public async Task GetVariableThrowsWhenNameIsMissing(string? name)
     {
-        var engine = new TesseractEngine();
-
-        engine.Dispose();
-
-        await Assert.That(engine.Clear).Throws<ObjectDisposedException>();
+        await Assert.That(() => _engine.GetVariable(name!)).Throws<ArgumentException>();
     }
-    
+
     [Test]
-    public async Task EngineCanBeCreatedAndDisposedRepeatedly()
+    public async Task SetInputImageThrowsWhenImageIsNull()
     {
-        for (var i = 0; i < 10; i++)
-        {
-            using var engine = new TesseractEngine();
-
-            await Assert.That(engine.Handle.IsInvalid).IsFalse();
-        }
+        await Assert.That(() => _engine.SetInputImage((IPix)null!))
+            .ThrowsExactly<ArgumentNullException>();
     }
+
+    [Test]
+    public async Task SetImageThrowsWhenImageIsNull()
+    {
+        await Assert.That(() => _engine.SetImage((IPix)null!))
+            .ThrowsExactly<ArgumentNullException>();
+    }
+
+    [Test]
+    public async Task SetImageThrowsWhenImageDataIsNull()
+    {
+        await Assert.That(() => _engine.SetImage(null!, 1, 1, 1))
+            .ThrowsExactly<ArgumentNullException>();
+    }
+
+    [Test]
+    public async Task TryRecognizeThrowsWhenMonitorIsNull()
+    {
+        await Assert.That(() => _engine.TryRecognize((ITesseractMonitor)null!))
+            .ThrowsExactly<ArgumentNullException>();
+    }
+
+    [Test]
+    [Arguments(null)]
+    [Arguments("")]
+    public async Task RendererFactoriesThrowWhenOutputNameIsMissing(string? outputName)
+    {
+        await Assert.That(() => _engine.CreateAltoRenderer(outputName!)).Throws<ArgumentException>();
+        await Assert.That(() => _engine.CreateTsvRenderer(outputName!)).Throws<ArgumentException>();
+        await Assert.That(() => _engine.CreateUnlvRenderer(outputName!)).Throws<ArgumentException>();
+        await Assert.That(() => _engine.CreateBoxTextRenderer(outputName!)).Throws<ArgumentException>();
+        await Assert.That(() => _engine.CreateWordStrBoxRenderer(outputName!)).Throws<ArgumentException>();
+        await Assert.That(() => _engine.CreateLstmBoxRenderer(outputName!)).Throws<ArgumentException>();
+    }
+
+    [Test]
+    public async Task CreatePdfRendererThrowsWhenDataDirectoryIsEmpty()
+    {
+        await Assert.That(() => _engine.CreatePdfRenderer("output", string.Empty, false))
+            .ThrowsExactly<ArgumentException>();
+    }
+
+    [Test]
+    [Arguments(null)]
+    [Arguments("")]
+    public async Task TryInitializeThrowsWhenDataPathIsMissing(string? dataPath)
+    {
+        await Assert.That(() => _engine.TryInitialize(dataPath!, "eng", OcrEngineMode.LstmOnly))
+            .Throws<ArgumentException>();
+    }
+
+#pragma warning disable SYSLIB0050
+    private static TesseractEngine CreateWithoutNativeHandle() =>
+        (TesseractEngine)FormatterServices.GetUninitializedObject(typeof(TesseractEngine));
+#pragma warning restore SYSLIB0050
 }

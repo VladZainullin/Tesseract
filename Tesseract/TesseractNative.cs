@@ -2,6 +2,7 @@
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
+using Leptonica;
 using Tesseract.Contracts;
 
 namespace Tesseract;
@@ -182,7 +183,7 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPISetInputImage")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void TessBaseApiSetInputImage(SafeHandle handle, nint pix);
+    public static partial void TessBaseApiSetInputImage(SafeHandle handle, SafeHandle pix);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIGetInputImage")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
@@ -343,7 +344,7 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPISetImage2")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void TessBaseApiSetImage2(SafeHandle handle, nint pix);
+    public static partial void TessBaseApiSetImage2(SafeHandle handle, SafeHandle pix);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPISetSourceResolution")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
@@ -358,7 +359,7 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIGetThresholdedImage")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessBaseApiGetThresholdedImage(SafeHandle handle);
+    public static partial PixSafeHandle TessBaseApiGetThresholdedImage(SafeHandle handle);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIGetRegions")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
@@ -579,13 +580,13 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessPageIteratorGetBinaryImage")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessPageIteratorGetBinaryImage(SafeHandle iterator, PageIteratorLevel level);
+    public static partial PixSafeHandle TessPageIteratorGetBinaryImage(SafeHandle iterator, PageIteratorLevel level);
 
     [LibraryImport(LibraryName, EntryPoint = "TessPageIteratorGetImage")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessPageIteratorGetImage(SafeHandle iterator, PageIteratorLevel level, int padding,
-        nint originalImagePtr, out int left, out int top);
+    public static partial PixSafeHandle TessPageIteratorGetImage(SafeHandle iterator, PageIteratorLevel level, int padding,
+        SafeHandle originalImagePtr, out int left, out int top);
 
     [LibraryImport(LibraryName, EntryPoint = "TessPageIteratorBaseline")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]

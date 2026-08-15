@@ -4,309 +4,24 @@ using Leptonica.Contracts;
 
 namespace Leptonica.Native;
 
-internal sealed partial class LibraryImportLeptonicaNativeApi
-    : ILeptonicaNativeApi
+internal static partial class LeptonicaNative
 {
-    internal static LibraryImportLeptonicaNativeApi Instance { get; } =
-        new();
-
-    static LibraryImportLeptonicaNativeApi()
+    static LeptonicaNative()
     {
         NativeLibrary.SetDllImportResolver(
-            typeof(LibraryImportLeptonicaNativeApi).Assembly,
+            typeof(LeptonicaNative).Assembly,
             LeptonicaNativeLibrary.Resolve);
-    }
-
-    private LibraryImportLeptonicaNativeApi()
-    {
-    }
-
-    public nint GetLeptonicaVersion()
-    {
-        return NativeGetLeptonicaVersion();
-    }
-
-    public nint PixCreate(
-        int width,
-        int height,
-        int depth)
-    {
-        return NativePixCreate(
-            width,
-            height,
-            depth);
-    }
-
-    public nint PixCreateHeader(
-        int width,
-        int height,
-        int depth)
-    {
-        return NativePixCreateHeader(
-            width,
-            height,
-            depth);
-    }
-
-    public nint PixCreateTemplate(
-        nint source)
-    {
-        return NativePixCreateTemplate(source);
-    }
-
-    public nint PixClone(
-        nint source)
-    {
-        return NativePixClone(source);
-    }
-
-    public nint PixCopy(
-        nint destination,
-        nint source)
-    {
-        return NativePixCopy(
-            destination,
-            source);
-    }
-
-    public void PixDestroy(
-        ref nint pix)
-    {
-        NativePixDestroy(ref pix);
-    }
-
-    public nint PixRead(
-        string filename)
-    {
-        return NativePixRead(filename);
-    }
-
-    public nint PixReadMem(
-        nint data,
-        nuint size)
-    {
-        return NativePixReadMem(
-            data,
-            size);
-    }
-
-    public int PixWrite(
-        string filename,
-        nint pix,
-        LeptonicaImageFormat format)
-    {
-        return NativePixWrite(
-            filename,
-            pix,
-            format);
-    }
-
-    public int PixGetDimensions(
-        nint pix,
-        out int width,
-        out int height,
-        out int depth)
-    {
-        return NativePixGetDimensions(
-            pix,
-            out width,
-            out height,
-            out depth);
-    }
-
-    public int PixGetWidth(
-        nint pix)
-    {
-        return NativePixGetWidth(pix);
-    }
-
-    public int PixGetHeight(
-        nint pix)
-    {
-        return NativePixGetHeight(pix);
-    }
-
-    public int PixGetDepth(
-        nint pix)
-    {
-        return NativePixGetDepth(pix);
-    }
-
-    public int PixGetWordsPerLine(
-        nint pix)
-    {
-        return NativePixGetWordsPerLine(pix);
-    }
-
-    public nint PixGetData(
-        nint pix)
-    {
-        return NativePixGetData(pix);
-    }
-
-    public int PixSetData(
-        nint pix,
-        nint data)
-    {
-        return NativePixSetData(
-            pix,
-            data);
-    }
-
-    public int PixGetPixel(
-        nint pix,
-        int x,
-        int y,
-        out uint value)
-    {
-        return NativePixGetPixel(
-            pix,
-            x,
-            y,
-            out value);
-    }
-
-    public int PixSetPixel(
-        nint pix,
-        int x,
-        int y,
-        uint value)
-    {
-        return NativePixSetPixel(
-            pix,
-            x,
-            y,
-            value);
-    }
-
-    public int PixSetResolution(
-        nint pix,
-        int xResolution,
-        int yResolution)
-    {
-        return NativePixSetResolution(
-            pix,
-            xResolution,
-            yResolution);
-    }
-
-    public int PixGetXResolution(
-        nint pix)
-    {
-        return NativePixGetXResolution(pix);
-    }
-
-    public int PixGetYResolution(
-        nint pix)
-    {
-        return NativePixGetYResolution(pix);
-    }
-
-    public nint PixConvertTo8(
-        nint source,
-        int cmapFlag)
-    {
-        return NativePixConvertTo8(
-            source,
-            cmapFlag);
-    }
-
-    public nint PixConvertTo32(
-        nint source)
-    {
-        return NativePixConvertTo32(source);
-    }
-
-    public nint PixConvertRgbToGray(
-        nint source,
-        float redWeight,
-        float greenWeight,
-        float blueWeight)
-    {
-        return NativePixConvertRgbToGray(
-            source,
-            redWeight,
-            greenWeight,
-            blueWeight);
-    }
-
-    public nint PixRemoveColormap(
-        nint source,
-        LeptonicaRemoveColormapMode type)
-    {
-        return NativePixRemoveColormap(
-            source,
-            type);
-    }
-
-    public nint PixThresholdToBinary(
-        nint source,
-        int threshold)
-    {
-        return NativePixThresholdToBinary(
-            source,
-            threshold);
-    }
-
-    public int PixOtsuAdaptiveThreshold(
-        nint source,
-        int sx,
-        int sy,
-        int smoothX,
-        int smoothY,
-        float scoreFraction,
-        out nint thresholdMap,
-        out nint destination)
-    {
-        return NativePixOtsuAdaptiveThreshold(
-            source,
-            sx,
-            sy,
-            smoothX,
-            smoothY,
-            scoreFraction,
-            out thresholdMap,
-            out destination);
-    }
-
-    public nint PixScale(
-        nint source,
-        float scaleX,
-        float scaleY)
-    {
-        return NativePixScale(
-            source,
-            scaleX,
-            scaleY);
-    }
-
-    public nint PixRotateOrth(
-        nint source,
-        int quarterTurns)
-    {
-        return NativePixRotateOrth(
-            source,
-            quarterTurns);
-    }
-
-    public nint PixDeskew(
-        nint source,
-        int reduction)
-    {
-        return NativePixDeskew(
-            source,
-            reduction);
     }
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "getLeptonicaVersion")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial nint NativeGetLeptonicaVersion();
+    public static partial nint NativeGetLeptonicaVersion();
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixCreate")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial nint NativePixCreate(
+    public static partial nint NativePixCreate(
         int width,
         int height,
         int depth);
@@ -314,135 +29,135 @@ internal sealed partial class LibraryImportLeptonicaNativeApi
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixCreateHeader")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial nint NativePixCreateHeader(int width, int height, int depth);
+    public static partial nint NativePixCreateHeader(int width, int height, int depth);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixCreateTemplate")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial nint NativePixCreateTemplate(nint source);
+    public static partial nint NativePixCreateTemplate(nint source);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixClone")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial nint NativePixClone(nint source);
+    public static partial nint NativePixClone(nint source);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixCopy")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial nint NativePixCopy(nint destination, nint source);
+    public static partial nint NativePixCopy(nint destination, nint source);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixDestroy")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial void NativePixDestroy(ref nint pix);
+    public static partial void NativePixDestroy(ref nint pix);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixRead",
         StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial nint NativePixRead(string filename);
+    public static partial nint NativePixRead(string filename);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixReadMem")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial nint NativePixReadMem(nint data, nuint size);
+    public static partial nint NativePixReadMem(nint data, nuint size);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixWrite",
         StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial int NativePixWrite(string filename, nint pix, LeptonicaImageFormat format);
+    public static partial int NativePixWrite(string filename, nint pix, LeptonicaImageFormat format);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixGetDimensions")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial int NativePixGetDimensions(nint pix, out int width, out int height, out int depth);
+    public static partial int NativePixGetDimensions(nint pix, out int width, out int height, out int depth);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixGetWidth")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial int NativePixGetWidth(nint pix);
+    public static partial int NativePixGetWidth(nint pix);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixGetHeight")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial int NativePixGetHeight(nint pix);
+    public static partial int NativePixGetHeight(nint pix);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixGetDepth")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial int NativePixGetDepth(nint pix);
+    public static partial int NativePixGetDepth(nint pix);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixGetWpl")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial int NativePixGetWordsPerLine(nint pix);
+    public static partial int NativePixGetWordsPerLine(nint pix);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixGetData")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial nint NativePixGetData(nint pix);
+    public static partial nint NativePixGetData(nint pix);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixSetData")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial int NativePixSetData(nint pix, nint data);
+    public static partial int NativePixSetData(nint pix, nint data);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixGetPixel")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial int NativePixGetPixel(nint pix, int x, int y, out uint value);
+    public static partial int NativePixGetPixel(nint pix, int x, int y, out uint value);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixSetPixel")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial int NativePixSetPixel(nint pix, int x, int y, uint value);
+    public static partial int NativePixSetPixel(nint pix, int x, int y, uint value);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixSetResolution")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial int NativePixSetResolution(nint pix, int xResolution, int yResolution);
+    public static partial int NativePixSetResolution(nint pix, int xResolution, int yResolution);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixGetXRes")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial int NativePixGetXResolution(nint pix);
+    public static partial int NativePixGetXResolution(nint pix);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixGetYRes")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial int NativePixGetYResolution(nint pix);
+    public static partial int NativePixGetYResolution(nint pix);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixConvertTo8")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial nint NativePixConvertTo8(nint source, int cmapFlag);
+    public static partial nint NativePixConvertTo8(nint source, int cmapFlag);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixConvertTo32")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial nint NativePixConvertTo32(nint source);
+    public static partial nint NativePixConvertTo32(nint source);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixConvertRGBToGray")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial nint NativePixConvertRgbToGray(nint source, float redWeight, float greenWeight,
+    public static partial nint NativePixConvertRgbToGray(nint source, float redWeight, float greenWeight,
         float blueWeight);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixRemoveColormap")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial nint NativePixRemoveColormap(nint source, LeptonicaRemoveColormapMode type);
+    public static partial nint NativePixRemoveColormap(nint source, LeptonicaRemoveColormapMode type);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixThresholdToBinary")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial nint NativePixThresholdToBinary(nint source, int threshold);
+    public static partial nint NativePixThresholdToBinary(nint source, int threshold);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixOtsuAdaptiveThreshold")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial int NativePixOtsuAdaptiveThreshold(
+    public static partial int NativePixOtsuAdaptiveThreshold(
         nint source,
         int sx,
         int sy,
@@ -455,15 +170,15 @@ internal sealed partial class LibraryImportLeptonicaNativeApi
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixScale")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial nint NativePixScale(nint source, float scaleX, float scaleY);
+    public static partial nint NativePixScale(nint source, float scaleX, float scaleY);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixRotateOrth")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial nint NativePixRotateOrth(nint source, int quarterTurns);
+    public static partial nint NativePixRotateOrth(nint source, int quarterTurns);
 
     [LibraryImport(LeptonicaNativeLibrary.LogicalName, EntryPoint = "pixDeskew")]
     [DefaultDllImportSearchPaths(LeptonicaNativeLibrary.DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    private static partial nint NativePixDeskew(nint source, int reduction);
+    public static partial nint NativePixDeskew(nint source, int reduction);
 }

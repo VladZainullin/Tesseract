@@ -32,9 +32,7 @@ public class TesseractPageIterator : ITesseractPageIterator
     public IPix GetBinaryImage(PageIteratorLevel level)
     {
         var pixPtr = TesseractNative.TessPageIteratorGetBinaryImage(Handle, level);
-        return pixPtr == 0
-            ? throw new InvalidOperationException("TessPageIteratorGetBinaryImage returned a null pointer.")
-            : Pix.FromHandle(pixPtr);
+        return new Pix(pixPtr);
     }
 
     public IPix GetImage(PageIteratorLevel level, int padding, IPix originalImage, out int left, out int top)
@@ -42,13 +40,8 @@ public class TesseractPageIterator : ITesseractPageIterator
         ArgumentNullException.ThrowIfNull(originalImage);
         var pixPtr =
             TesseractNative.TessPageIteratorGetImage(Handle, level, padding, originalImage.Handle, out left, out top);
-        if (pixPtr == 0)
-        {
-            throw new InvalidOperationException(
-                "TessPageIteratorGetImage returned a null pointer.");
-        }
 
-        return Pix.FromHandle(pixPtr);
+        return new Pix(pixPtr);
     }
 
     public void GetParagraphInfo(

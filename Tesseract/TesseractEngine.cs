@@ -407,7 +407,7 @@ public sealed class TesseractEngine : ITesseractEngine
     public IPix GetThresholdedImage()
     {
         var pixPtr = TesseractNative.TessBaseApiGetThresholdedImage(Handle);
-        return Pix.FromHandle(pixPtr);
+        return new Pix(pixPtr);
     }
 
     public void Dispose()

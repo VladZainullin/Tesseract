@@ -62,7 +62,7 @@ public sealed class TesseractResultRenderer : ITesseractResultRenderer
 
     public string GetTitle() => TesseractNative.TessResultRendererTitle(Handle);
 
-    public int GetImageNumbers() => TesseractNative.TessResultRendererImageNum(Handle);
+    public int GetImageNumber() => TesseractNative.TessResultRendererImageNum(Handle);
 
     public void Dispose()
     {

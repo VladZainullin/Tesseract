@@ -92,5 +92,5 @@ public interface ITesseractResultRenderer : IHasSafeHandle, IDisposable
     /// <returns>
     /// The number of processed images.
     /// </returns>
-    int GetImageNumbers();
+    int GetImageNumber();
 }

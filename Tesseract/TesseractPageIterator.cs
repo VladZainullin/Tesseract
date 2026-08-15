@@ -99,7 +99,7 @@ public class TesseractPageIterator : ITesseractPageIterator
 
     protected virtual void Dispose(bool disposing)
     {
-        Handle.Dispose();
+        if (disposing) Handle.Dispose();
     }
 
     public void Dispose()

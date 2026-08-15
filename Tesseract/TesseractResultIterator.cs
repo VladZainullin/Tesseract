@@ -1,3 +1,4 @@
+using System;
 using System.Runtime.InteropServices;
 using Tesseract.Contracts;
 
@@ -18,8 +19,21 @@ public sealed class TesseractResultIterator
 
     public ITesseractChoiceIterator GetChoiceIterator()
     {
-        var pointer = TesseractNative.TessResultIteratorGetChoiceIterator(Handle);
-        return new TesseractChoiceIterator(pointer);
+        var choiceHandle = TesseractNative.TessResultIteratorGetChoiceIterator(Handle);
+        try
+        {
+            if (choiceHandle.IsInvalid)
+                throw new InvalidOperationException(
+                    "A choice iterator is unavailable at the current iterator position.");
+
+            choiceHandle.AttachOwner(Handle);
+            return new TesseractChoiceIterator(choiceHandle);
+        }
+        catch
+        {
+            choiceHandle.Dispose();
+            throw;
+        }
     }
 
     public override bool TryNext(PageIteratorLevel level)

@@ -101,4 +101,26 @@ internal sealed class TesseractEngineIntegrationTests
         await Assert.That(copy.Handle.IsInvalid).IsFalse();
     }
 
+    [Test]
+    public async Task ChoiceIteratorsKeepDisposedResultIteratorAlive()
+    {
+        var dataPath = TesseractTestEnvironment.Configure();
+        using var engine = new TesseractEngine();
+        await Assert.That(engine.TryInitialize(dataPath, "eng", OcrEngineMode.LstmOnly)).IsTrue();
+        engine.SetSegmentationMode(PageSegmentationMode.SingleLine);
+        engine.SetImage(TestImage.Create(), TestImage.Width, TestImage.Height, 1);
+        using var monitor = new TesseractMonitor();
+        await Assert.That(engine.TryRecognize(monitor)).IsTrue();
+
+        var resultIterator = engine.GetIterator();
+        resultIterator.Begin();
+        using var firstChoiceIterator = resultIterator.GetChoiceIterator();
+        using var secondChoiceIterator = resultIterator.GetChoiceIterator();
+
+        resultIterator.Dispose();
+
+        await Assert.That(firstChoiceIterator.GetText()).IsNotNullOrEmpty();
+        await Assert.That(secondChoiceIterator.GetText()).IsNotNullOrEmpty();
+    }
+
 }

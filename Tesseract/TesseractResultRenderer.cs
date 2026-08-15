@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.InteropServices;
 using Tesseract.Contracts;
 
@@ -19,10 +20,20 @@ public sealed class TesseractResultRenderer : ITesseractResultRenderer
         TesseractNative.TessResultRendererInsert(Handle, renderer.Handle);
     }
     
-    public ITesseractResultRenderer NextRenderer()
+    public bool TryNext([NotNullWhen(true)] out ITesseractResultRenderer? renderer)
     {
         var rendererPtr = TesseractNative.TessResultRendererNext(Handle);
-        return new TesseractResultRenderer(rendererPtr);
+
+        if (rendererPtr == 0)
+        {
+            renderer = null;
+            return false;
+        }
+
+        renderer = new TesseractResultRenderer(
+            new TesseractResultRendererSafeHandle(rendererPtr, ownsHandle: false));
+
+        return true;
     }
     
     

@@ -1,3 +1,5 @@
+using System.Diagnostics.CodeAnalysis;
+
 namespace Tesseract.Contracts;
 
 /// <summary>
@@ -19,12 +21,17 @@ public interface ITesseractResultRenderer : IHasSafeHandle, IDisposable
     void Insert(ITesseractResultRenderer renderer);
     
     /// <summary>
-    /// Gets the next renderer in the renderer chain.
+    /// Attempts to get the next renderer in the renderer chain.
     /// </summary>
+    /// <param name="renderer">
+    /// When this method returns <see langword="true"/>, contains the next renderer
+    /// in the chain; otherwise, <see langword="null"/>.
+    /// </param>
     /// <returns>
-    /// The next result renderer in the chain.
+    /// <see langword="true"/> if another renderer exists in the chain;
+    /// otherwise, <see langword="false"/>.
     /// </returns>
-    ITesseractResultRenderer NextRenderer();
+    bool TryNext([NotNullWhen(true)] out ITesseractResultRenderer? renderer);
     
     /// <summary>
     /// Begins rendering a new document.

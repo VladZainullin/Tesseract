@@ -124,7 +124,7 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessResultRendererNext")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial TesseractResultRendererSafeHandle TessResultRendererNext(SafeHandle renderer);
+    public static partial nint TessResultRendererNext(SafeHandle renderer);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultRendererBeginDocument",
         StringMarshalling = StringMarshalling.Utf8)]

@@ -16,7 +16,7 @@ internal static partial class TesseractNative
 
     static TesseractNative()
     {
-        NativeLibrary.SetDllImportResolver(typeof(TesseractNative).Assembly, (libraryName, assembly, searchPath) =>
+        NativeLibrary.SetDllImportResolver(typeof(TesseractNative).Assembly, (libraryName, _, _) =>
         {
             if (!string.Equals(libraryName, LibraryName, StringComparison.Ordinal)) return nint.Zero;
             lock (Lock)

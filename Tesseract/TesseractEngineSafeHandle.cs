@@ -11,7 +11,7 @@ public sealed class TesseractEngineSafeHandle : SafeHandleZeroOrMinusOneIsInvali
 
     protected override bool ReleaseHandle()
     {
-        TesseractNative.TessBaseApiDelete(this);
+        TesseractNative.TessBaseApiDelete(handle);
         return true;
     }
 }

@@ -168,7 +168,7 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIDelete")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void TessBaseApiDelete(SafeHandle handle);
+    public static partial void TessBaseApiDelete(nint handle);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPISetInputName", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]

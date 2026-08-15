@@ -240,7 +240,7 @@ internal static partial class TesseractNative
         StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string TessBaseApiGetStringVariable(SafeHandle handle, string name);
+    public static partial string? TessBaseApiGetStringVariable(SafeHandle handle, string name);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIPrintVariables")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]

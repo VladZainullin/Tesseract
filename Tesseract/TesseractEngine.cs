@@ -164,7 +164,7 @@ public sealed class TesseractEngine : ITesseractEngine
         TesseractNative.TessBaseApiSetInputImage(Handle, pix.Handle);
     }
 
-    public string GetVariable(string name)
+    public string? GetVariable(string name)
     {
         ArgumentException.ThrowIfNullOrEmpty(name);
         return TesseractNative.TessBaseApiGetStringVariable(Handle, name);

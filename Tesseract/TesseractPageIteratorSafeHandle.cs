@@ -4,6 +4,10 @@ namespace Tesseract;
 
 public class TesseractPageIteratorSafeHandle : SafeHandleZeroOrMinusOneIsInvalid
 {
+    public TesseractPageIteratorSafeHandle() : base(true)
+    {
+    }
+    
     public TesseractPageIteratorSafeHandle(nint handle, bool ownsHandle) : base(ownsHandle)
     {
         SetHandle(handle);

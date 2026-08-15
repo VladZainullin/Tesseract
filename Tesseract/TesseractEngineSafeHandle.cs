@@ -4,6 +4,10 @@ namespace Tesseract;
 
 public sealed class TesseractEngineSafeHandle : SafeHandleZeroOrMinusOneIsInvalid
 {
+    public TesseractEngineSafeHandle() : base(true)
+    {
+    }
+    
     public TesseractEngineSafeHandle(nint handle, bool ownsHandle) : base(ownsHandle)
     {
         SetHandle(handle);

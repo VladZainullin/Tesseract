@@ -8,14 +8,14 @@ public sealed class TesseractResultRendererSafeHandle : SafeHandleZeroOrMinusOne
     {
     }
     
-    public TesseractResultRendererSafeHandle(nint handle, bool ownsHandle) : base(ownsHandle)
+    internal TesseractResultRendererSafeHandle(nint handle, bool ownsHandle) : base(ownsHandle)
     {
         SetHandle(handle);
     }
 
     protected override bool ReleaseHandle()
     {
-        TesseractNative.TessDeleteResultRenderer(this);
+        TesseractNative.TessDeleteResultRenderer(handle);
         return true;
     }
 }

@@ -114,7 +114,7 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessDeleteResultRenderer")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void TessDeleteResultRenderer(SafeHandle renderer);
+    public static partial void TessDeleteResultRenderer(nint renderer);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultRendererInsert")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]

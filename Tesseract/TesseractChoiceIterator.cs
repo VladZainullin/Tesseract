@@ -1,3 +1,5 @@
+using System;
+using System.Runtime.InteropServices;
 using Tesseract.Contracts;
 
 namespace Tesseract;
@@ -8,6 +10,11 @@ public sealed class TesseractChoiceIterator : ITesseractChoiceIterator
 
     public TesseractChoiceIterator(TesseractChoiceIteratorSafeHandle handle)
     {
+        ArgumentNullException.ThrowIfNull(handle);
+        ObjectDisposedException.ThrowIf(handle.IsClosed, handle);
+        if (handle.IsInvalid)
+            throw new ArgumentException("Native choice iterator handle is invalid.", nameof(handle));
+        
         _handle = handle;
     }
 
@@ -18,7 +25,11 @@ public sealed class TesseractChoiceIterator : ITesseractChoiceIterator
 
     public string GetText()
     {
-        return TesseractNative.TessChoiceIteratorGetUtf8Text(_handle);
+        var textPtr = TesseractNative.TessChoiceIteratorGetUtf8Text(_handle);
+
+        return textPtr == nint.Zero
+            ? throw new InvalidOperationException("TessChoiceIteratorGetUTF8Text returned a null pointer.")
+            : Marshal.PtrToStringUTF8(textPtr)!;
     }
 
     public float GetConfidence()

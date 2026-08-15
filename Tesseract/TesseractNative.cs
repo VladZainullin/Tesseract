@@ -722,7 +722,7 @@ internal static partial class TesseractNative
         StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string TessChoiceIteratorGetUtf8Text(SafeHandle choiceIterator);
+    public static partial nint TessChoiceIteratorGetUtf8Text(SafeHandle choiceIterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessChoiceIteratorConfidence")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]

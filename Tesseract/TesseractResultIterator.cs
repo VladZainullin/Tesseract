@@ -1,4 +1,3 @@
-using System;
 using System.Runtime.InteropServices;
 using Tesseract.Contracts;
 
@@ -19,8 +18,9 @@ public sealed class TesseractResultIterator
 
     public ITesseractPageIterator GetPageIterator()
     {
-        var pageIteratorPtr = TesseractNative.TessResultIteratorGetPageIterator(Handle);
-        return new TesseractPageIterator(pageIteratorPtr);
+        var borrowed = TesseractNative.TessResultIteratorGetPageIterator(Handle);
+        var copy = TesseractNative.TessPageIteratorCopy(borrowed);
+        return new TesseractPageIterator(copy);
     }
 
     public ITesseractPageIterator GetPageIteratorConst()

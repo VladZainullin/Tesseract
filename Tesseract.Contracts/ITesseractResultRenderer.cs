@@ -1,8 +1,7 @@
 namespace Tesseract.Contracts;
 
-public interface ITesseractResultRenderer
+public interface ITesseractResultRenderer : IHasSafeHandle
 {
-    nint Handle { get; }
     string Extension { get; }
     
     string Title { get; }

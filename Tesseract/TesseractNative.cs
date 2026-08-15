@@ -113,51 +113,51 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessDeleteResultRenderer")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void TessDeleteResultRenderer(nint renderer);
+    public static partial void TessDeleteResultRenderer(SafeHandle renderer);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultRendererInsert")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void TessResultRendererInsert(nint renderer, nint subRenderer);
+    public static partial void TessResultRendererInsert(SafeHandle renderer, SafeHandle subRenderer);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultRendererNext")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessResultRendererNext(nint renderer);
+    public static partial nint TessResultRendererNext(SafeHandle renderer);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultRendererBeginDocument",
         StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(TesseractBoolMarshaller))]
-    public static partial bool TessResultRendererBeginDocument(nint renderer, string title);
+    public static partial bool TessResultRendererBeginDocument(SafeHandle renderer, string title);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultRendererAddImage")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(TesseractBoolMarshaller))]
-    public static partial bool TessResultRendererAddImage(nint renderer, SafeHandle api);
+    public static partial bool TessResultRendererAddImage(SafeHandle renderer, SafeHandle api);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultRendererEndDocument")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(TesseractBoolMarshaller))]
-    public static partial bool TessResultRendererEndDocument(nint renderer);
+    public static partial bool TessResultRendererEndDocument(SafeHandle renderer);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultRendererExtention", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string TessResultRendererExtension(nint renderer);
+    public static partial string TessResultRendererExtension(SafeHandle renderer);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultRendererTitle", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string TessResultRendererTitle(nint renderer);
+    public static partial string TessResultRendererTitle(SafeHandle renderer);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultRendererImageNum")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial int TessResultRendererImageNum(nint renderer);
+    public static partial int TessResultRendererImageNum(SafeHandle renderer);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPICreate")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]

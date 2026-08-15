@@ -16,19 +16,6 @@ public sealed class TesseractResultIterator
         return new TesseractResultIterator(pointer);
     }
 
-    public ITesseractPageIterator GetPageIterator()
-    {
-        var borrowed = TesseractNative.TessResultIteratorGetPageIterator(Handle);
-        var copy = TesseractNative.TessPageIteratorCopy(borrowed);
-        return new TesseractPageIterator(copy);
-    }
-
-    public ITesseractPageIterator GetPageIteratorConst()
-    {
-        var pointer = TesseractNative.TessResultIteratorGetPageIteratorConst(Handle);
-        return new TesseractPageIterator(pointer);
-    }
-
     public ITesseractChoiceIterator GetChoiceIterator()
     {
         var pointer = TesseractNative.TessResultIteratorGetChoiceIterator(Handle);

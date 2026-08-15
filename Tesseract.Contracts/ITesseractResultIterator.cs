@@ -2,10 +2,6 @@ namespace Tesseract.Contracts;
 
 public interface ITesseractResultIterator : ITesseractPageIterator
 {
-    ITesseractPageIterator GetPageIterator();
-    
-    ITesseractPageIterator GetPageIteratorConst();
-
     ITesseractChoiceIterator GetChoiceIterator();
     
     string? GetText(PageIteratorLevel level);

@@ -123,4 +123,22 @@ internal sealed class TesseractEngineIntegrationTests
         await Assert.That(secondChoiceIterator.GetText()).IsNotNullOrEmpty();
     }
 
+    [Test]
+    public async Task ResultIteratorKeepsDisposedEngineAlive()
+    {
+        var dataPath = TesseractTestEnvironment.Configure();
+        var engine = new TesseractEngine();
+        await Assert.That(engine.TryInitialize(dataPath, "eng", OcrEngineMode.LstmOnly)).IsTrue();
+        engine.SetSegmentationMode(PageSegmentationMode.SingleLine);
+        engine.SetImage(TestImage.Create(), TestImage.Width, TestImage.Height, 1);
+        using var monitor = new TesseractMonitor();
+        await Assert.That(engine.TryRecognize(monitor)).IsTrue();
+
+        using var iterator = engine.GetIterator();
+        engine.Dispose();
+        iterator.Begin();
+
+        await Assert.That(iterator.GetText(PageIteratorLevel.Word)).IsEqualTo("TEST");
+    }
+
 }

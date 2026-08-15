@@ -84,8 +84,20 @@ public class TesseractPageIterator : ITesseractPageIterator
 
     public virtual ITesseractPageIterator Copy()
     {
-        var pageIteratorPtr = TesseractNative.TessPageIteratorCopy(Handle);
-        return new TesseractPageIterator(pageIteratorPtr);
+        var copy = TesseractNative.TessPageIteratorCopy(Handle);
+        try
+        {
+            if (copy.IsInvalid)
+                throw new InvalidOperationException("TessPageIteratorCopy returned an invalid handle.");
+
+            copy.AttachOwner(Handle);
+            return new TesseractPageIterator(copy);
+        }
+        catch
+        {
+            copy.Dispose();
+            throw;
+        }
     }
 
     protected virtual void Dispose(bool disposing)

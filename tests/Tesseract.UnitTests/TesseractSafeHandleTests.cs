@@ -1,3 +1,5 @@
+using Microsoft.Win32.SafeHandles;
+
 namespace Tesseract.UnitTests;
 
 internal sealed class TesseractSafeHandleTests
@@ -30,5 +32,64 @@ internal sealed class TesseractSafeHandleTests
         handle.Dispose();
 
         await Assert.That(handle.IsClosed).IsTrue();
+    }
+
+    [Test]
+    public async Task PageIteratorHandlesKeepOwnerAliveUntilAllAreDisposed()
+    {
+        using var owner = new TrackingOwnerSafeHandle();
+        using var firstIterator = new TrackingPageIteratorSafeHandle();
+        using var secondIterator = new TrackingPageIteratorSafeHandle();
+        firstIterator.AttachOwner(owner);
+        secondIterator.AttachOwner(owner);
+
+        owner.Dispose();
+        await Assert.That(owner.ReleaseCount).IsEqualTo(0);
+
+        firstIterator.Dispose();
+        await Assert.That(owner.ReleaseCount).IsEqualTo(0);
+
+        secondIterator.Dispose();
+        await Assert.That(owner.ReleaseCount).IsEqualTo(1);
+    }
+
+    [Test]
+    public async Task InvalidPageIteratorHandleRejectsOwner()
+    {
+        using var owner = new TrackingOwnerSafeHandle();
+        using var iterator = new TesseractPageIteratorSafeHandle();
+
+        await Assert.That(() => iterator.AttachOwner(owner))
+            .ThrowsExactly<InvalidOperationException>();
+    }
+
+    private sealed class TrackingOwnerSafeHandle : SafeHandleZeroOrMinusOneIsInvalid
+    {
+        internal TrackingOwnerSafeHandle() : base(ownsHandle: true)
+        {
+            SetHandle((nint)1);
+        }
+
+        internal int ReleaseCount { get; private set; }
+
+        protected override bool ReleaseHandle()
+        {
+            ReleaseCount++;
+            return true;
+        }
+    }
+
+    private sealed class TrackingPageIteratorSafeHandle : TesseractPageIteratorSafeHandle
+    {
+        internal TrackingPageIteratorSafeHandle()
+        {
+            SetHandle((nint)2);
+        }
+
+        protected override bool ReleaseHandle()
+        {
+            ReleaseOwner();
+            return true;
+        }
     }
 }

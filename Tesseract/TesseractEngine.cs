@@ -284,13 +284,37 @@ public sealed class TesseractEngine : ITesseractEngine
     public ITesseractResultIterator GetIterator()
     {
         var iterator = TesseractNative.TessBaseApiGetIterator(Handle);
-        return new TesseractResultIterator(iterator);
+        try
+        {
+            if (iterator.IsInvalid)
+                throw new InvalidOperationException("TessBaseAPIGetIterator returned an invalid handle.");
+
+            iterator.AttachOwner(Handle);
+            return new TesseractResultIterator(iterator);
+        }
+        catch
+        {
+            iterator.Dispose();
+            throw;
+        }
     }
 
     public ITesseractPageIterator AnalyzeLayout()
     {
         var iterator = TesseractNative.TessBaseApiAnalyseLayout(Handle);
-        return new TesseractPageIterator(iterator);
+        try
+        {
+            if (iterator.IsInvalid)
+                throw new InvalidOperationException("TessBaseAPIAnalyseLayout returned an invalid handle.");
+
+            iterator.AttachOwner(Handle);
+            return new TesseractPageIterator(iterator);
+        }
+        catch
+        {
+            iterator.Dispose();
+            throw;
+        }
     }
 
     public bool TryGetTextDirection(out int outOffset, out float slope)

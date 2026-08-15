@@ -13,8 +13,20 @@ public sealed class TesseractResultIterator
     
     public override ITesseractResultIterator Copy()
     {
-        var pointer = TesseractNative.TessResultIteratorCopy(Handle);
-        return new TesseractResultIterator(pointer);
+        var copy = TesseractNative.TessResultIteratorCopy(Handle);
+        try
+        {
+            if (copy.IsInvalid)
+                throw new InvalidOperationException("TessResultIteratorCopy returned an invalid handle.");
+
+            copy.AttachOwner(Handle);
+            return new TesseractResultIterator(copy);
+        }
+        catch
+        {
+            copy.Dispose();
+            throw;
+        }
     }
 
     public ITesseractChoiceIterator GetChoiceIterator()

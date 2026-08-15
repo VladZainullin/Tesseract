@@ -5,7 +5,14 @@ public sealed class TesseractResultIteratorSafeHandle
 {
     protected override bool ReleaseHandle()
     {
-        TesseractNative.TessResultIteratorDelete(handle);
-        return true;
+        try
+        {
+            TesseractNative.TessResultIteratorDelete(handle);
+            return true;
+        }
+        finally
+        {
+            ReleaseOwner();
+        }
     }
 }

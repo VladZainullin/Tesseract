@@ -11,8 +11,8 @@ public interface ITesseractEngine : IHasSafeHandle
     
     string? Text { get; }
     float MeanTextConfidence { get; }
-    void SetVariable(string name, string value);
-    void SetDebugVariable(string name, string value);
+    bool TrySetVariable(string name, string value);
+    bool TrySetDebugVariable(string name, string value);
     void SetInputImage(IPix pix);
     void SetInputName(string name);
     string? GetVariable(string name);

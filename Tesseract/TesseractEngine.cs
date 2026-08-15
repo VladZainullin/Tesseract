@@ -144,18 +144,18 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
         return new TesseractResultRenderer(rendererPtr);
     }
 
-    public void SetVariable(string name, string value)
+    public bool TrySetVariable(string name, string value)
     {
         ArgumentException.ThrowIfNullOrEmpty(name);
         ArgumentNullException.ThrowIfNull(value);
-        TesseractNative.TessBaseApiSetVariable(Handle, name, value);
+        return TesseractNative.TessBaseApiSetVariable(Handle, name, value);
     }
 
-    public void SetDebugVariable(string name, string value)
+    public bool TrySetDebugVariable(string name, string value)
     {
         ArgumentException.ThrowIfNullOrEmpty(name);
         ArgumentNullException.ThrowIfNull(value);
-        TesseractNative.TessBaseApiSetDebugVariable(Handle, name, value);
+        return TesseractNative.TessBaseApiSetDebugVariable(Handle, name, value);
     }
 
     public void SetInputImage(IPix pix)

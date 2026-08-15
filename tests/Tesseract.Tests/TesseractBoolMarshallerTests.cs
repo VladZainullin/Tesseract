@@ -3,23 +3,15 @@ namespace Tesseract.Tests;
 internal sealed class TesseractBoolMarshallerTests
 {
     [Test]
-    [Arguments(0)]
-    public async Task ConvertToManagedReturnsFalse(int nativeValue)
+    [Arguments(0, false)]
+    [Arguments(1, true)]
+    [Arguments(-1, true)]
+    [Arguments(int.MaxValue, true)]
+    [Arguments(int.MinValue, true)]
+    public async Task ConvertToManagedReturnsExpectedResult(int nativeValue, bool expected)
     {
         var result = TesseractBoolMarshaller.ConvertToManaged(nativeValue);
         
-        await Assert.That(result).IsFalse();
-    }
-
-    [Test]
-    [Arguments(1)]
-    [Arguments(-1)]
-    [Arguments(int.MaxValue)]
-    [Arguments(int.MinValue)]
-    public async Task ConvertToManagedReturnsTrue(int nativeValue)
-    {
-        var result = TesseractBoolMarshaller.ConvertToManaged(nativeValue);
-
-        await Assert.That(result).IsTrue();
+        await Assert.That(result).IsEqualTo(expected);
     }
 }

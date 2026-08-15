@@ -13,6 +13,8 @@ public class TesseractPageIterator : ITesseractPageIterator
     public TesseractPageIterator(TesseractPageIteratorSafeHandle handle)
     {
         ArgumentNullException.ThrowIfNull(handle);
+        ObjectDisposedException.ThrowIf(handle.IsClosed, handle);
+        if (handle.IsInvalid) throw new ArgumentException("Native page iterator handle is invalid.", nameof(handle));
         Handle = handle;
     }
 

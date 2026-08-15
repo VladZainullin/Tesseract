@@ -625,16 +625,6 @@ internal static partial class TesseractNative
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial TesseractResultIteratorSafeHandle TessResultIteratorCopy(SafeHandle iterator);
 
-    [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorGetPageIterator")]
-    [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
-    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial TesseractPageIteratorSafeHandle TessResultIteratorGetPageIterator(SafeHandle iterator);
-
-    [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorGetPageIteratorConst")]
-    [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
-    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial TesseractPageIteratorSafeHandle TessResultIteratorGetPageIteratorConst(SafeHandle iterator);
-
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorGetChoiceIterator")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]

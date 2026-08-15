@@ -3,7 +3,7 @@ using Tesseract.Contracts;
 
 namespace Tesseract;
 
-public sealed class TesseractChoiceIterator : IDisposable, ITesseractChoiceIterator
+public sealed class TesseractChoiceIterator : ITesseractChoiceIterator
 {
     private readonly TesseractChoiceIteratorSafeHandle _handle;
 

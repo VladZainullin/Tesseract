@@ -4,7 +4,7 @@ using Tesseract.Contracts;
 
 namespace Tesseract;
 
-public sealed class TesseractResultRenderer : ITesseractResultRenderer, IDisposable
+public sealed class TesseractResultRenderer : ITesseractResultRenderer
 {
     public TesseractResultRenderer(TesseractResultRendererSafeHandle handle)
     {

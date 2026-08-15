@@ -7,7 +7,7 @@ using Tesseract.Contracts;
 
 namespace Tesseract;
 
-public sealed class TesseractEngine : IDisposable, ITesseractEngine
+public sealed class TesseractEngine : ITesseractEngine
 {
     public SafeHandle Handle { get; } = TesseractNative.TessBaseApiCreate();
 

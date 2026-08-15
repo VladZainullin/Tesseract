@@ -2,7 +2,7 @@
 
 namespace Tesseract.Contracts;
 
-public interface ITesseractEngine : IHasSafeHandle
+public interface ITesseractEngine : IHasSafeHandle, IDisposable
 {
     static abstract string Version { get; }
     

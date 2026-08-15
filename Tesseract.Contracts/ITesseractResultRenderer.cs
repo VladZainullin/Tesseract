@@ -1,6 +1,6 @@
 namespace Tesseract.Contracts;
 
-public interface ITesseractResultRenderer : IHasSafeHandle
+public interface ITesseractResultRenderer : IHasSafeHandle, IDisposable
 {
     string Extension { get; }
     

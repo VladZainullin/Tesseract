@@ -1,6 +1,6 @@
 namespace Tesseract.Contracts;
 
-public interface ITesseractChoiceIterator
+public interface ITesseractChoiceIterator : IDisposable
 {
     bool TryNext();
 

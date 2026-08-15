@@ -1,4 +1,3 @@
-using System;
 using Tesseract.Contracts;
 
 namespace Tesseract;

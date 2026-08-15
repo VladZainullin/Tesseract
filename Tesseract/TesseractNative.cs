@@ -418,7 +418,7 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIRecognize")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial int TessBaseApiRecognize(SafeHandle handle, nint monitor);
+    public static partial int TessBaseApiRecognize(SafeHandle handle, SafeHandle monitor);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIProcessPages", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
@@ -722,7 +722,7 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessMonitorCreate")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessMonitorCreate();
+    public static partial TesseractMonitorSafeHandle TessMonitorCreate();
 
     [LibraryImport(LibraryName, EntryPoint = "TessMonitorDelete")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
@@ -752,10 +752,10 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessMonitorGetProgress")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial int TessMonitorGetProgress(nint monitor);
+    public static partial int TessMonitorGetProgress(SafeHandle monitor);
 
     [LibraryImport(LibraryName, EntryPoint = "TessMonitorSetDeadlineMSecs")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void TessMonitorSetDeadlineMSecs(nint monitor, int deadline);
+    public static partial void TessMonitorSetDeadlineMSecs(SafeHandle monitor, int deadline);
 }

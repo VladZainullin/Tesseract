@@ -4,7 +4,7 @@ namespace Tesseract.Contracts;
 
 public interface ITesseractEngine : IHasSafeHandle, IDisposable
 {
-    static abstract string Version { get; }
+    static abstract string? Version { get; }
     
     PageSegmentationMode PageSegmentationMode { get; }
     string? InputName { get; }

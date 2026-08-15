@@ -11,7 +11,14 @@ public sealed class TesseractEngine : ITesseractEngine
 {
     public SafeHandle Handle { get; } = TesseractNative.TessBaseApiCreate();
 
-    public static string Version => TesseractNative.TessVersion();
+    public static string? Version
+    {
+        get
+        {
+            var pointer = TesseractNative.TessVersion();
+            return Marshal.PtrToStringUTF8(pointer);
+        }
+    }
 
     public string GetDataPath() => TesseractNative.TessBaseApiGetDataPath(Handle);
 

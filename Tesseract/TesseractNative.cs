@@ -38,10 +38,10 @@ internal static partial class TesseractNative
         });
     }
 
-    [LibraryImport(LibraryName, EntryPoint = "TessVersion", StringMarshalling = StringMarshalling.Utf8)]
+    [LibraryImport(LibraryName, EntryPoint = "TessVersion")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string TessVersion();
+    public static partial nint TessVersion();
 
     [LibraryImport(LibraryName, EntryPoint = "TessDeleteText")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]

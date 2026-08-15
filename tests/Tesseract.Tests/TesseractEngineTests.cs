@@ -33,6 +33,7 @@ internal sealed class TesseractEngineTests
     {
         var version = TesseractEngine.Version;
 
+        await Assert.That(version).IsNotNull();
         await Assert.That(version.Length).IsGreaterThan(0);
     }
     

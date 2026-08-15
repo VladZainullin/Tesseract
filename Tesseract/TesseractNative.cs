@@ -291,12 +291,12 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIGetAvailableLanguagesAsVector")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessBaseApiGetAvailableLanguagesAsVector(SafeHandle handle);
+    public static partial TesseractStringArraySafeHandle TessBaseApiGetAvailableLanguagesAsVector(SafeHandle handle);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIGetLoadedLanguagesAsVector")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessBaseApiGetLoadedLanguagesAsVector(SafeHandle handle);
+    public static partial TesseractStringArraySafeHandle TessBaseApiGetLoadedLanguagesAsVector(SafeHandle handle);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIInitForAnalysePage")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]

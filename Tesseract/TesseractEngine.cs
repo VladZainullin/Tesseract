@@ -67,60 +67,14 @@ public sealed class TesseractEngine : ITesseractEngine
 
     public IReadOnlyList<string> GetLoadedLanguages()
     {
-        var listPtr = TesseractNative.TessBaseApiGetLoadedLanguagesAsVector(Handle);
-        if (listPtr == nint.Zero)
-        {
-            return Array.Empty<string>();
-        }
-
-        try
-        {
-            var languages = new List<string>();
-
-            for (var index = 0;; index++)
-            {
-                var stringPointer = Marshal.ReadIntPtr(listPtr, index * nint.Size);
-                if (stringPointer == nint.Zero) break;
-
-                var language = Marshal.PtrToStringUTF8(stringPointer);
-                if (language is not null) languages.Add(language);
-            }
-
-            return languages.AsReadOnly();
-        }
-        finally
-        {
-            TesseractNative.TessDeleteTextArray(listPtr);
-        }
+        using var listPtr = TesseractNative.TessBaseApiGetLoadedLanguagesAsVector(Handle);
+        return listPtr.ToManagedStrings();
     }
 
     public IReadOnlyList<string> GetAvailableLanguages()
     {
-        var listPtr = TesseractNative.TessBaseApiGetAvailableLanguagesAsVector(Handle);
-        if (listPtr == nint.Zero)
-        {
-            return Array.Empty<string>();
-        }
-
-        try
-        {
-            var languages = new List<string>();
-
-            for (var index = 0;; index++)
-            {
-                var stringPointer = Marshal.ReadIntPtr(listPtr, index * nint.Size);
-                if (stringPointer == nint.Zero) break;
-
-                var language = Marshal.PtrToStringUTF8(stringPointer);
-                if (language is not null) languages.Add(language);
-            }
-
-            return languages.AsReadOnly();
-        }
-        finally
-        {
-            TesseractNative.TessDeleteTextArray(listPtr);
-        }
+        using var listPtr = TesseractNative.TessBaseApiGetAvailableLanguagesAsVector(Handle);
+        return listPtr.ToManagedStrings();
     }
 
     public ITesseractResultRenderer CreateUnlvRenderer(string outputName)

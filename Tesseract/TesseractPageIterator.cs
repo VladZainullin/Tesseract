@@ -109,7 +109,7 @@ public class TesseractPageIterator : ITesseractPageIterator
         var pageIteratorPtr = TesseractNative.TessPageIteratorCopy(Handle);
         return pageIteratorPtr == 0
             ? throw new InvalidOperationException("TessPageIteratorCopy returned a null pointer.")
-            : new TesseractPageIterator(new TesseractPageIteratorSafeHandle(pageIteratorPtr, false));
+            : new TesseractPageIterator(new TesseractPageIteratorSafeHandle(pageIteratorPtr, true));
     }
 
     protected virtual void Dispose(bool disposing)

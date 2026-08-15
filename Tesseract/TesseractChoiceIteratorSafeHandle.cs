@@ -7,11 +7,6 @@ public sealed class TesseractChoiceIteratorSafeHandle : SafeHandleZeroOrMinusOne
     public TesseractChoiceIteratorSafeHandle() : base(true)
     {
     }
-    
-    public TesseractChoiceIteratorSafeHandle(nint handle, bool ownsHandle) : base(ownsHandle)
-    {
-        SetHandle(handle);
-    }
 
     protected override bool ReleaseHandle()
     {

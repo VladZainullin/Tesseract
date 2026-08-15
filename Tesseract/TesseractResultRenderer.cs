@@ -13,13 +13,18 @@ public sealed class TesseractResultRenderer : ITesseractResultRenderer
     }
 
     public SafeHandle Handle { get; }
-    
+
     public void Insert(ITesseractResultRenderer renderer)
     {
         ArgumentNullException.ThrowIfNull(renderer);
+
+        if (ReferenceEquals(this, renderer))
+            throw new ArgumentException("A renderer cannot be inserted into itself.", nameof(renderer));
+
         TesseractNative.TessResultRendererInsert(Handle, renderer.Handle);
+        renderer.Handle.SetHandleAsInvalid();
     }
-    
+
     public bool TryNext([NotNullWhen(true)] out ITesseractResultRenderer? renderer)
     {
         var rendererPtr = TesseractNative.TessResultRendererNext(Handle);
@@ -35,8 +40,8 @@ public sealed class TesseractResultRenderer : ITesseractResultRenderer
 
         return true;
     }
-    
-    
+
+
     public bool TryBeginDocument(string title)
     {
         return TesseractNative.TessResultRendererBeginDocument(Handle, title);
@@ -52,7 +57,7 @@ public sealed class TesseractResultRenderer : ITesseractResultRenderer
     {
         return TesseractNative.TessResultRendererEndDocument(Handle);
     }
-    
+
     public string GetExtension() => TesseractNative.TessResultRendererExtension(Handle);
 
     public string GetTitle() => TesseractNative.TessResultRendererTitle(Handle);

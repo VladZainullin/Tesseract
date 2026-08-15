@@ -47,4 +47,25 @@ internal sealed class TesseractEngineTests
 
         await Assert.That(engine.Handle.IsClosed).IsTrue();
     }
+    
+    [Test]
+    public async Task MethodAfterDisposeThrowsObjectDisposedException()
+    {
+        var engine = new TesseractEngine();
+
+        engine.Dispose();
+
+        await Assert.That(engine.Clear).Throws<ObjectDisposedException>();
+    }
+    
+    [Test]
+    public async Task EngineCanBeCreatedAndDisposedRepeatedly()
+    {
+        for (var i = 0; i < 10; i++)
+        {
+            using var engine = new TesseractEngine();
+
+            await Assert.That(engine.Handle.IsInvalid).IsFalse();
+        }
+    }
 }

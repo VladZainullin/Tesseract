@@ -19,6 +19,28 @@ public interface ITesseractEngine : IHasSafeHandle
     bool TryGetVariable(string name, out int? value);
     bool TryGetVariable(string name, out double? value);
     bool TryGetVariable(string name, out bool? value);
+
+    ITesseractResultRenderer TextRendererCreate(string outputName);
+
+    ITesseractResultRenderer HOcrRendererCreate(string outputName);
+
+    ITesseractResultRenderer HOcrRendererCreate(string outputName, bool fontInfo);
+
+    ITesseractResultRenderer AltoRendererCreate(string outputName);
+
+    ITesseractResultRenderer TsvRendererCreate(string outputName);
+
+    ITesseractResultRenderer PdfRendererCreate(string outputName, string dataDir, bool textOnly);
+
+    IReadOnlyList<string> GetLoadedLanguages();
+
+    ITesseractResultRenderer UnlvRendererCreate(string outputName);
+
+    ITesseractResultRenderer BoxTextRendererCreate(string outputName);
+
+    ITesseractResultRenderer WordStrBoxRendererCreate(string outputName);
+
+    ITesseractResultRenderer LstmBoxRendererCreate(string outputName);
     string? GetHOcrText(int pageNumber);
     string? GetAltoText(int pageNumber);
     string? GetTsvText(int pageNumber);

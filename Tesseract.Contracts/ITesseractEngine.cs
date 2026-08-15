@@ -13,7 +13,7 @@ public interface ITesseractEngine : IHasSafeHandle
     float MeanTextConfidence { get; }
     void SetVariable(string name, string value);
     void SetDebugVariable(string name, string value);
-    void SetInputName(IPix pix);
+    void SetInputImage(IPix pix);
     void SetInputName(string name);
     string? GetVariable(string name);
     bool TryGetVariable(string name, out int? value);

@@ -158,7 +158,7 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
         TesseractNative.TessBaseApiSetDebugVariable(Handle, name, value);
     }
 
-    public void SetInputName(IPix pix)
+    public void SetInputImage(IPix pix)
     {
         ArgumentNullException.ThrowIfNull(pix);
         TesseractNative.TessBaseApiSetInputImage(Handle, pix.Handle);

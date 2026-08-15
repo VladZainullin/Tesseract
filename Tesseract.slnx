@@ -13,6 +13,6 @@
     <Project Path="Tesseract/Tesseract.csproj" />
   </Folder>
   <Folder Name="/tests/">
-    <Project Path="tests/Tesseract.Tests/Tesseract.Tests.csproj" />
+    <Project Path="tests\Tesseract.UnitTests\Tesseract.UnitTests.csproj" />
   </Folder>
 </Solution>

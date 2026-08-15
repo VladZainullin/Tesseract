@@ -1,4 +1,4 @@
-namespace Tesseract.Tests;
+namespace Tesseract.UnitTests;
 
 internal sealed class TesseractEngineTests
 {

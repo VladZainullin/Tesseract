@@ -4,7 +4,8 @@
         <ImplicitUsings>disable</ImplicitUsings>
     </PropertyGroup>
     <ItemGroup>
-        <InternalsVisibleTo Include="Tesseract.Tests" />
+        <InternalsVisibleTo Include="Tesseract.UnitTests" />
+        <InternalVisibleTo Include="Tesseract.IntegrationTests" />
     </ItemGroup>
     <ItemGroup>
       <ProjectReference Include="..\Leptonica\Leptonica.csproj" />

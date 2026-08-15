@@ -63,7 +63,6 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
         var listPtr = TesseractNative.TessBaseApiGetLoadedLanguagesAsVector(Handle);
         if (listPtr == nint.Zero)
         {
-            TesseractNative.TessDeleteTextArray(listPtr);
             return Array.Empty<string>();
         }
 
@@ -93,7 +92,6 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
         var listPtr = TesseractNative.TessBaseApiGetAvailableLanguagesAsVector(Handle);
         if (listPtr == nint.Zero)
         {
-            TesseractNative.TessDeleteTextArray(listPtr);
             return Array.Empty<string>();
         }
 

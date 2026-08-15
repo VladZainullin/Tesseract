@@ -228,15 +228,8 @@ public sealed class TesseractEngine : ITesseractEngine
     {
         get
         {
-            var textPtr = TesseractNative.TessBaseApiGetUtf8Text(Handle);
-            try
-            {
-                return Marshal.PtrToStringUTF8(textPtr);
-            }
-            finally
-            {
-                TesseractNative.TessDeleteText(textPtr);
-            }
+            using var text = TesseractNative.TessBaseApiGetUtf8Text(Handle);
+            return text.ToManagedString();
         }
     }
 
@@ -244,67 +237,32 @@ public sealed class TesseractEngine : ITesseractEngine
 
     public string? GetHOcrText(int pageNumber)
     {
-        var textPtr = TesseractNative.TessBaseApiGetHOcrText(Handle, pageNumber);
-        try
-        {
-            return Marshal.PtrToStringUTF8(textPtr);
-        }
-        finally
-        {
-            TesseractNative.TessDeleteText(textPtr);
-        }
+        using var text = TesseractNative.TessBaseApiGetHOcrText(Handle, pageNumber);
+        return text.ToManagedString();
     }
 
     public string? GetAltoText(int pageNumber)
     {
-        var textPtr = TesseractNative.TessBaseApiGetAltoText(Handle, pageNumber);
-        try
-        {
-            return Marshal.PtrToStringUTF8(textPtr);
-        }
-        finally
-        {
-            TesseractNative.TessDeleteText(textPtr);
-        }
+        using var text = TesseractNative.TessBaseApiGetAltoText(Handle, pageNumber);
+        return text.ToManagedString();
     }
 
     public string? GetTsvText(int pageNumber)
     {
-        var textPtr = TesseractNative.TessBaseApiGetTsvText(Handle, pageNumber);
-        try
-        {
-            return Marshal.PtrToStringUTF8(textPtr);
-        }
-        finally
-        {
-            TesseractNative.TessDeleteText(textPtr);
-        }
+        using var text = TesseractNative.TessBaseApiGetTsvText(Handle, pageNumber);
+        return text.ToManagedString();
     }
 
     public string? GetLstmText(int pageNumber)
     {
-        var textPtr = TesseractNative.TessBaseApiGetLstmBoxText(Handle, pageNumber);
-        try
-        {
-            return Marshal.PtrToStringUTF8(textPtr);
-        }
-        finally
-        {
-            TesseractNative.TessDeleteText(textPtr);
-        }
+        using var text = TesseractNative.TessBaseApiGetLstmBoxText(Handle, pageNumber);
+        return text.ToManagedString();
     }
 
     public string? GetBoxText(int pageNumber)
     {
-        var textPtr = TesseractNative.TessBaseApiGetBoxText(Handle, pageNumber);
-        try
-        {
-            return Marshal.PtrToStringUTF8(textPtr);
-        }
-        finally
-        {
-            TesseractNative.TessDeleteText(textPtr);
-        }
+        using var text = TesseractNative.TessBaseApiGetBoxText(Handle, pageNumber);
+        return text.ToManagedString();
     }
 
     public void SetSegmentationMode(PageSegmentationMode mode)

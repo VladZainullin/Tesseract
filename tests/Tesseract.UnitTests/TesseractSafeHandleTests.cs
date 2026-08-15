@@ -11,6 +11,7 @@ internal sealed class TesseractSafeHandleTests
         using var choiceIterator = new TesseractChoiceIteratorSafeHandle();
         using var renderer = new TesseractResultRendererSafeHandle();
         using var monitor = new TesseractMonitorSafeHandle();
+        using var text = new TesseractStringSafeHandle();
 
         await Assert.That(engine.IsInvalid).IsTrue();
         await Assert.That(pageIterator.IsInvalid).IsTrue();
@@ -18,6 +19,7 @@ internal sealed class TesseractSafeHandleTests
         await Assert.That(choiceIterator.IsInvalid).IsTrue();
         await Assert.That(renderer.IsInvalid).IsTrue();
         await Assert.That(monitor.IsInvalid).IsTrue();
+        await Assert.That(text.IsInvalid).IsTrue();
     }
 
     [Test]

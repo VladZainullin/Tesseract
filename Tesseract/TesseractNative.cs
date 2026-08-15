@@ -327,8 +327,8 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIRect")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessBaseApiRect(SafeHandle handle, nint imageData, int bytesPerPixel, int bytesPerLine,
-        int left, int top, int width, int height);
+    public static partial TesseractStringSafeHandle TessBaseApiRect(SafeHandle handle, nint imageData,
+        int bytesPerPixel, int bytesPerLine, int left, int top, int width, int height);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIClearAdaptiveClassifier")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
@@ -447,42 +447,42 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIGetUTF8Text")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessBaseApiGetUtf8Text(SafeHandle handle);
+    public static partial TesseractStringSafeHandle TessBaseApiGetUtf8Text(SafeHandle handle);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIGetHOCRText")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessBaseApiGetHOcrText(SafeHandle handle, int pageNumber);
+    public static partial TesseractStringSafeHandle TessBaseApiGetHOcrText(SafeHandle handle, int pageNumber);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIGetAltoText")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessBaseApiGetAltoText(SafeHandle handle, int pageNumber);
+    public static partial TesseractStringSafeHandle TessBaseApiGetAltoText(SafeHandle handle, int pageNumber);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIGetTsvText")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessBaseApiGetTsvText(SafeHandle handle, int pageNumber);
+    public static partial TesseractStringSafeHandle TessBaseApiGetTsvText(SafeHandle handle, int pageNumber);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIGetBoxText")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessBaseApiGetBoxText(SafeHandle handle, int pageNumber);
+    public static partial TesseractStringSafeHandle TessBaseApiGetBoxText(SafeHandle handle, int pageNumber);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIGetLSTMBoxText")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessBaseApiGetLstmBoxText(SafeHandle handle, int pageNumber);
+    public static partial TesseractStringSafeHandle TessBaseApiGetLstmBoxText(SafeHandle handle, int pageNumber);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIGetWordStrBoxText")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessBaseApiGetWordStrBoxText(SafeHandle handle, int pageNumber);
+    public static partial TesseractStringSafeHandle TessBaseApiGetWordStrBoxText(SafeHandle handle, int pageNumber);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIGetUNLVText")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessBaseApiGetUnlvText(SafeHandle handle);
+    public static partial TesseractStringSafeHandle TessBaseApiGetUnlvText(SafeHandle handle);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIMeanTextConf")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
@@ -639,7 +639,8 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorGetUTF8Text")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessResultIteratorGetUtf8Text(SafeHandle iterator, PageIteratorLevel level);
+    public static partial TesseractStringSafeHandle TessResultIteratorGetUtf8Text(SafeHandle iterator,
+        PageIteratorLevel level);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorConfidence")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]

@@ -43,17 +43,8 @@ public sealed class TesseractResultIterator
 
     public string? GetText(PageIteratorLevel level)
     {
-        var pointer = TesseractNative.TessResultIteratorGetUtf8Text(Handle, level);
-        if (pointer == 0)
-            return null;
-        try
-        {
-            return Marshal.PtrToStringUTF8(pointer);
-        }
-        finally
-        {
-            TesseractNative.TessDeleteText(pointer);
-        }
+        using var text = TesseractNative.TessResultIteratorGetUtf8Text(Handle, level);
+        return text.ToManagedString();
     }
 
     public float GetConfidence(PageIteratorLevel level)

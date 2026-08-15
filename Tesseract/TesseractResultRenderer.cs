@@ -12,25 +12,20 @@ public sealed class TesseractResultRenderer : ITesseractResultRenderer
     }
 
     public SafeHandle Handle { get; }
-
-    public string Extension => TesseractNative.TessResultRendererExtension(Handle);
-
-    public string Title => TesseractNative.TessResultRendererTitle(Handle);
-
-    public int ImageNumbers => TesseractNative.TessResultRendererImageNum(Handle);
-
-    public ITesseractResultRenderer NextRenderer()
-    {
-        var rendererPtr = TesseractNative.TessResultRendererNext(Handle);
-        return new TesseractResultRenderer(rendererPtr);
-    }
-
+    
     public void Insert(ITesseractResultRenderer renderer)
     {
         ArgumentNullException.ThrowIfNull(renderer);
         TesseractNative.TessResultRendererInsert(Handle, renderer.Handle);
     }
-
+    
+    public ITesseractResultRenderer NextRenderer()
+    {
+        var rendererPtr = TesseractNative.TessResultRendererNext(Handle);
+        return new TesseractResultRenderer(rendererPtr);
+    }
+    
+    
     public bool TryBeginDocument(string title)
     {
         return TesseractNative.TessResultRendererBeginDocument(Handle, title);
@@ -46,6 +41,12 @@ public sealed class TesseractResultRenderer : ITesseractResultRenderer
     {
         return TesseractNative.TessResultRendererEndDocument(Handle);
     }
+    
+    public string GetExtension() => TesseractNative.TessResultRendererExtension(Handle);
+
+    public string GetTitle() => TesseractNative.TessResultRendererTitle(Handle);
+
+    public int GetImageNumbers() => TesseractNative.TessResultRendererImageNum(Handle);
 
     public void Dispose()
     {

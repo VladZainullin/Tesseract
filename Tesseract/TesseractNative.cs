@@ -533,7 +533,7 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessPageIteratorDelete")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void TessPageIteratorDelete(SafeHandle iterator);
+    public static partial void TessPageIteratorDelete(nint iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessPageIteratorCopy")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
@@ -617,7 +617,7 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorDelete")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void TessResultIteratorDelete(SafeHandle iterator);
+    public static partial void TessResultIteratorDelete(nint iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorCopy")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
@@ -709,7 +709,7 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessChoiceIteratorDelete")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void TessChoiceIteratorDelete(SafeHandle choiceIterator);
+    public static partial void TessChoiceIteratorDelete(nint choiceIterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessChoiceIteratorNext")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]

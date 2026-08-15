@@ -9,7 +9,7 @@ public sealed class TesseractResultIteratorSafeHandle : TesseractPageIteratorSaf
 
     protected override bool ReleaseHandle()
     {
-        TesseractNative.TessResultIteratorDelete(this);
+        TesseractNative.TessResultIteratorDelete(handle);
         return true;
     }
 }

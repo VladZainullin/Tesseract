@@ -11,7 +11,7 @@ public class TesseractPageIteratorSafeHandle : SafeHandleZeroOrMinusOneIsInvalid
 
     protected override bool ReleaseHandle()
     {
-        TesseractNative.TessPageIteratorDelete(this);
+        TesseractNative.TessPageIteratorDelete(handle);
         return true;
     }
 }

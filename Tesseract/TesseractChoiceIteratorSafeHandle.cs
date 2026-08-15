@@ -11,7 +11,7 @@ public sealed class TesseractChoiceIteratorSafeHandle : SafeHandleZeroOrMinusOne
 
     protected override bool ReleaseHandle()
     {
-        TesseractNative.TessChoiceIteratorDelete(this);
+        TesseractNative.TessChoiceIteratorDelete(handle);
         return true;
     }
 }

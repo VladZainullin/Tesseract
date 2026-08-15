@@ -11,7 +11,7 @@ public sealed class TesseractStringArraySafeHandle : SafeHandleZeroOrMinusOneIsI
     {
     }
     
-    internal IReadOnlyList<string> ToManagedStrings()
+    public IReadOnlyList<string> ToManagedStrings()
     {
         if (IsInvalid)
             return Array.Empty<string>();

@@ -9,7 +9,7 @@ public sealed class TesseractStringSafeHandle : SafeHandleZeroOrMinusOneIsInvali
     {
     }
 
-    internal string? ToManagedString()
+    public string? ToManagedString()
     {
         return IsInvalid ? null : Marshal.PtrToStringUTF8(handle);
     }

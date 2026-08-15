@@ -12,7 +12,7 @@ public class TesseractPageIteratorSafeHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
     }
 
-    internal void AttachOwner(SafeHandle owner)
+    public void AttachOwner(SafeHandle owner)
     {
         ObjectDisposedException.ThrowIf(IsClosed, this);
         if (IsInvalid)

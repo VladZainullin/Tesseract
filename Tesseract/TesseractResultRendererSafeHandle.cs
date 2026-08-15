@@ -8,7 +8,7 @@ public sealed class TesseractResultRendererSafeHandle : SafeHandleZeroOrMinusOne
     {
     }
     
-    internal TesseractResultRendererSafeHandle(nint handle, bool ownsHandle) : base(ownsHandle)
+    public TesseractResultRendererSafeHandle(nint handle, bool ownsHandle) : base(ownsHandle)
     {
         SetHandle(handle);
     }

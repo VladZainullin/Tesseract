@@ -49,15 +49,16 @@ public sealed class TesseractResultIterator
 
     public string? WordRecognitionLanguage()
     {
-        return TesseractNative.TessResultIteratorWordRecognitionLanguage(Handle);
+        return Marshal.PtrToStringUTF8(TesseractNative.TessResultIteratorWordRecognitionLanguage(Handle));
     }
 
     public string? GetWordFontAttributes(out bool isBold, out bool isItalic, out bool isUnderlined, out bool isMonospace,
         out bool isSerif, out bool isSmallCaps, out int pointSize, out int fontId)
     {
-        return TesseractNative.TessResultIteratorWordFontAttributes(
+        var pointer = TesseractNative.TessResultIteratorWordFontAttributes(
             Handle, out isBold, out isItalic, out isUnderlined, out isMonospace, out isSerif, out isSmallCaps,
             out pointSize, out fontId);
+        return Marshal.PtrToStringUTF8(pointer);
     }
 
     public bool IsWordFromDictionary()

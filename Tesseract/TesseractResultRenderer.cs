@@ -9,6 +9,11 @@ public sealed class TesseractResultRenderer : ITesseractResultRenderer
 {
     public TesseractResultRenderer(TesseractResultRendererSafeHandle handle)
     {
+        ArgumentNullException.ThrowIfNull(handle);
+        ObjectDisposedException.ThrowIf(handle.IsClosed, handle);
+        if (handle.IsInvalid)
+            throw new ArgumentException("Native result renderer handle is invalid.", nameof(handle));
+
         Handle = handle;
     }
 
@@ -58,9 +63,9 @@ public sealed class TesseractResultRenderer : ITesseractResultRenderer
         return TesseractNative.TessResultRendererEndDocument(Handle);
     }
 
-    public string GetExtension() => TesseractNative.TessResultRendererExtension(Handle);
+    public string GetExtension() => Marshal.PtrToStringUTF8(TesseractNative.TessResultRendererExtension(Handle))!;
 
-    public string GetTitle() => TesseractNative.TessResultRendererTitle(Handle);
+    public string GetTitle() => Marshal.PtrToStringUTF8(TesseractNative.TessResultRendererTitle(Handle))!;
 
     public int GetImageNumber() => TesseractNative.TessResultRendererImageNum(Handle);
 

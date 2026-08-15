@@ -20,7 +20,7 @@ public sealed class TesseractEngine : ITesseractEngine
         }
     }
 
-    public string GetDataPath() => TesseractNative.TessBaseApiGetDataPath(Handle);
+    public string GetDataPath() => Marshal.PtrToStringUTF8(TesseractNative.TessBaseApiGetDataPath(Handle))!;
 
     public PageSegmentationMode PageSegmentationMode => TesseractNative.TessBaseApiGetPageSegMode(Handle);
 
@@ -174,7 +174,7 @@ public sealed class TesseractEngine : ITesseractEngine
     public string? GetVariable(string name)
     {
         ArgumentException.ThrowIfNullOrEmpty(name);
-        return TesseractNative.TessBaseApiGetStringVariable(Handle, name);
+        return Marshal.PtrToStringUTF8(TesseractNative.TessBaseApiGetStringVariable(Handle, name));
     }
 
     public bool TryGetVariable(string name, out int? value)
@@ -222,7 +222,7 @@ public sealed class TesseractEngine : ITesseractEngine
         TesseractNative.TessBaseApiSetInputName(Handle, name);
     }
 
-    public string? InputName => TesseractNative.TessBaseApiGetInputName(Handle);
+    public string? InputName => Marshal.PtrToStringUTF8(TesseractNative.TessBaseApiGetInputName(Handle));
 
     public string? Text
     {
@@ -366,7 +366,7 @@ public sealed class TesseractEngine : ITesseractEngine
 
     public string GetInitializationLanguages()
     {
-        return TesseractNative.TessBaseApiGetInitLanguagesAsString(Handle);
+        return Marshal.PtrToStringUTF8(TesseractNative.TessBaseApiGetInitLanguagesAsString(Handle))!;
     }
 
     public ITesseractResultIterator GetIterator()
@@ -388,7 +388,7 @@ public sealed class TesseractEngine : ITesseractEngine
 
     public string GetUniChar(int uniCharId)
     {
-        return TesseractNative.TessBaseApiGetUniChar(Handle, uniCharId);
+        return Marshal.PtrToStringUTF8(TesseractNative.TessBaseApiGetUniChar(Handle, uniCharId))!;
     }
 
     public void SetMinimumOrientationMargin(double margin)

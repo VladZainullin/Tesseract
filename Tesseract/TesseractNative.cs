@@ -148,12 +148,12 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessResultRendererExtention", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string TessResultRendererExtension(SafeHandle renderer);
+    public static partial nint TessResultRendererExtension(SafeHandle renderer);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultRendererTitle", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string TessResultRendererTitle(SafeHandle renderer);
+    public static partial nint TessResultRendererTitle(SafeHandle renderer);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultRendererImageNum")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
@@ -178,7 +178,7 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIGetInputName", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string? TessBaseApiGetInputName(SafeHandle handle);
+    public static partial nint TessBaseApiGetInputName(SafeHandle handle);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPISetInputImage")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
@@ -198,7 +198,7 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIGetDatapath", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string TessBaseApiGetDataPath(SafeHandle handle);
+    public static partial nint TessBaseApiGetDataPath(SafeHandle handle);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPISetOutputName", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
@@ -241,7 +241,7 @@ internal static partial class TesseractNative
         StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string? TessBaseApiGetStringVariable(SafeHandle handle, string name);
+    public static partial nint TessBaseApiGetStringVariable(SafeHandle handle, string name);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIPrintVariables")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
@@ -286,7 +286,7 @@ internal static partial class TesseractNative
         StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string TessBaseApiGetInitLanguagesAsString(SafeHandle handle);
+    public static partial nint TessBaseApiGetInitLanguagesAsString(SafeHandle handle);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIGetAvailableLanguagesAsVector")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
@@ -524,7 +524,7 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIGetUnichar", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string TessBaseApiGetUniChar(SafeHandle handle, int uniCharId);
+    public static partial nint TessBaseApiGetUniChar(SafeHandle handle, int uniCharId);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPISetMinOrientationMargin")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
@@ -650,13 +650,13 @@ internal static partial class TesseractNative
         StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string? TessResultIteratorWordRecognitionLanguage(SafeHandle iterator);
+    public static partial nint TessResultIteratorWordRecognitionLanguage(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorWordFontAttributes",
         StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string? TessResultIteratorWordFontAttributes(
+    public static partial nint TessResultIteratorWordFontAttributes(
         SafeHandle iterator,
         [MarshalAs(UnmanagedType.Bool)] out bool isBold,
         [MarshalAs(UnmanagedType.Bool)] out bool isItalic,

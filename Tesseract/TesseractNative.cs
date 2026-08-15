@@ -412,7 +412,7 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIAnalyseLayout")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessBaseApiAnalyseLayout(SafeHandle handle);
+    public static partial TesseractResultIteratorSafeHandle TessBaseApiAnalyseLayout(SafeHandle handle);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIRecognize")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
@@ -436,7 +436,7 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIGetIterator")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessBaseApiGetIterator(SafeHandle handle);
+    public static partial TesseractResultIteratorSafeHandle TessBaseApiGetIterator(SafeHandle handle);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIGetMutableIterator")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
@@ -538,7 +538,7 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessPageIteratorCopy")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessPageIteratorCopy(SafeHandle iterator);
+    public static partial TesseractPageIteratorSafeHandle TessPageIteratorCopy(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessPageIteratorBegin")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
@@ -622,22 +622,22 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorCopy")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessResultIteratorCopy(SafeHandle iterator);
+    public static partial TesseractResultIteratorSafeHandle TessResultIteratorCopy(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorGetPageIterator")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessResultIteratorGetPageIterator(SafeHandle iterator);
+    public static partial TesseractResultIteratorSafeHandle TessResultIteratorGetPageIterator(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorGetPageIteratorConst")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessResultIteratorGetPageIteratorConst(SafeHandle iterator);
+    public static partial TesseractResultIteratorSafeHandle TessResultIteratorGetPageIteratorConst(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorGetChoiceIterator")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessResultIteratorGetChoiceIterator(SafeHandle iterator);
+    public static partial TesseractChoiceIteratorSafeHandle TessResultIteratorGetChoiceIterator(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorNext")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]

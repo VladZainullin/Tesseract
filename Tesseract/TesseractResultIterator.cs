@@ -14,33 +14,25 @@ public sealed class TesseractResultIterator
     public override ITesseractResultIterator Copy()
     {
         var pointer = TesseractNative.TessResultIteratorCopy(Handle);
-        return pointer == 0
-            ? throw new InvalidOperationException("TessResultIteratorCopy returned a null pointer.")
-            : new TesseractResultIterator(new TesseractResultIteratorSafeHandle(pointer, true));
+        return new TesseractResultIterator(pointer);
     }
 
     public ITesseractPageIterator GetPageIterator()
     {
         var pageIteratorPtr = TesseractNative.TessResultIteratorGetPageIterator(Handle);
-        return pageIteratorPtr == 0
-            ? throw new InvalidOperationException("TessResultIteratorGetPageIterator returned a null pointer.")
-            : new TesseractPageIterator(new TesseractResultIteratorSafeHandle(pageIteratorPtr, false));
+        return new TesseractPageIterator(pageIteratorPtr);
     }
 
     public ITesseractPageIterator GetPageIteratorConst()
     {
         var pointer = TesseractNative.TessResultIteratorGetPageIteratorConst(Handle);
-        return pointer == 0
-            ? throw new InvalidOperationException("TessResultIteratorGetPageIteratorConst returned a null pointer.")
-            : new TesseractPageIterator(new TesseractResultIteratorSafeHandle(pointer, false));
+        return new TesseractPageIterator(pointer);
     }
 
     public ITesseractChoiceIterator GetChoiceIterator()
     {
         var pointer = TesseractNative.TessResultIteratorGetChoiceIterator(Handle);
-        return pointer == 0
-            ? throw new InvalidOperationException("TessResultIteratorGetChoiceIterator returned a null pointer.")
-            : new TesseractChoiceIterator(new TesseractChoiceIteratorSafeHandle(pointer, false));
+        return new TesseractChoiceIterator(pointer);
     }
 
     public override bool TryNext(PageIteratorLevel level)

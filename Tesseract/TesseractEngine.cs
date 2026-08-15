@@ -367,13 +367,13 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
     public ITesseractResultIterator GetIterator()
     {
         var iterator = TesseractNative.TessBaseApiGetIterator(Handle);
-        return new TesseractResultIterator(new TesseractResultIteratorSafeHandle(iterator, true));
+        return new TesseractResultIterator(iterator);
     }
 
     public ITesseractPageIterator AnalyzeLayout()
     {
         var iterator = TesseractNative.TessBaseApiAnalyseLayout(Handle);
-        return new TesseractPageIterator(new TesseractResultIteratorSafeHandle(iterator, true));
+        return new TesseractPageIterator(iterator);
     }
 
     public bool TryGetTextDirection(out int outOffset, out float slope)

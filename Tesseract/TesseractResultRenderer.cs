@@ -6,10 +6,9 @@ namespace Tesseract;
 
 public sealed class TesseractResultRenderer : ITesseractResultRenderer, IDisposable
 {
-    public TesseractResultRenderer(nint handle)
+    public TesseractResultRenderer(TesseractResultRendererSafeHandle handle)
     {
-        if (handle <= 0) throw new ArgumentOutOfRangeException(nameof(handle));
-        Handle = new TesseractResultRendererSafeHandle(handle, true);
+        Handle = handle;
     }
 
     public SafeHandle Handle { get; }

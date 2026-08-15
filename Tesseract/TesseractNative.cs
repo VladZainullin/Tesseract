@@ -60,55 +60,55 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessTextRendererCreate", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessTextRendererCreate(string outputBase);
+    public static partial TesseractResultRendererSafeHandle TessTextRendererCreate(string outputBase);
 
     [LibraryImport(LibraryName, EntryPoint = "TessHOcrRendererCreate", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessHOcrRendererCreate(string outputBase);
+    public static partial TesseractResultRendererSafeHandle TessHOcrRendererCreate(string outputBase);
 
     [LibraryImport(LibraryName, EntryPoint = "TessHOcrRendererCreate2", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessHOcrRendererCreate2(string outputBase,
+    public static partial TesseractResultRendererSafeHandle TessHOcrRendererCreate2(string outputBase,
         [MarshalAs(UnmanagedType.Bool)] bool fontInfo);
 
     [LibraryImport(LibraryName, EntryPoint = "TessAltoRendererCreate", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessAltoRendererCreate(string outputBase);
+    public static partial TesseractResultRendererSafeHandle TessAltoRendererCreate(string outputBase);
 
     [LibraryImport(LibraryName, EntryPoint = "TessTsvRendererCreate", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessTsvRendererCreate(string outputBase);
+    public static partial TesseractResultRendererSafeHandle TessTsvRendererCreate(string outputBase);
 
     [LibraryImport(LibraryName, EntryPoint = "TessPDFRendererCreate", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessPdfRendererCreate(string outputBase, string dataDir,
+    public static partial TesseractResultRendererSafeHandle TessPdfRendererCreate(string outputBase, string dataDir,
         [MarshalAs(UnmanagedType.Bool)] bool textOnly);
 
     [LibraryImport(LibraryName, EntryPoint = "TessUnlvRendererCreate", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessUnlvRendererCreate(string outputBase);
+    public static partial TesseractResultRendererSafeHandle TessUnlvRendererCreate(string outputBase);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBoxTextRendererCreate", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessBoxTextRendererCreate(string outputBase);
+    public static partial TesseractResultRendererSafeHandle TessBoxTextRendererCreate(string outputBase);
 
     [LibraryImport(LibraryName, EntryPoint = "TessLSTMBoxRendererCreate", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessLstmBoxRendererCreate(string outputBase);
+    public static partial TesseractResultRendererSafeHandle TessLstmBoxRendererCreate(string outputBase);
 
     [LibraryImport(LibraryName, EntryPoint = "TessWordStrBoxRendererCreate",
         StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessWordStrBoxRendererCreate(string outputBase);
+    public static partial TesseractResultRendererSafeHandle TessWordStrBoxRendererCreate(string outputBase);
 
     [LibraryImport(LibraryName, EntryPoint = "TessDeleteResultRenderer")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
@@ -123,7 +123,7 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessResultRendererNext")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessResultRendererNext(SafeHandle renderer);
+    public static partial TesseractResultRendererSafeHandle TessResultRendererNext(SafeHandle renderer);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultRendererBeginDocument",
         StringMarshalling = StringMarshalling.Utf8)]
@@ -162,12 +162,12 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPICreate")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessBaseApiCreate();
+    public static partial TesseractEngineSafeHandle TessBaseApiCreate();
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPIDelete")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void TessBaseApiDelete(nint handle);
+    public static partial void TessBaseApiDelete(SafeHandle handle);
 
     [LibraryImport(LibraryName, EntryPoint = "TessBaseAPISetInputName", StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]

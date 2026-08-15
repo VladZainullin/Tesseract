@@ -9,7 +9,7 @@ namespace Tesseract;
 
 public sealed class TesseractEngine : IDisposable, ITesseractEngine
 {
-    public SafeHandle Handle { get; } = new TesseractEngineSafeHandle(TesseractNative.TessBaseApiCreate(), true);
+    public SafeHandle Handle { get; } = TesseractNative.TessBaseApiCreate();
 
     public static string Version => TesseractNative.TessVersion();
 

@@ -233,7 +233,7 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
         }
     }
 
-    public float MeanTextConfidence => TesseractNative.TessBaseApiMeanTextConf(Handle);
+    public int MeanTextConfidence => TesseractNative.TessBaseApiMeanTextConf(Handle);
 
     public string? GetHOcrText(int pageNumber)
     {

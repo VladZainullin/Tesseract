@@ -10,7 +10,7 @@ public interface ITesseractEngine : IHasSafeHandle
     string? InputName { get; }
     
     string? Text { get; }
-    float MeanTextConfidence { get; }
+    int MeanTextConfidence { get; }
     bool TrySetVariable(string name, string value);
     bool TrySetDebugVariable(string name, string value);
     void SetInputImage(IPix pix);

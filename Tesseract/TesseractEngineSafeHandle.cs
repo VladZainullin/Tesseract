@@ -7,11 +7,6 @@ public sealed class TesseractEngineSafeHandle : SafeHandleZeroOrMinusOneIsInvali
     public TesseractEngineSafeHandle() : base(true)
     {
     }
-    
-    public TesseractEngineSafeHandle(nint handle, bool ownsHandle) : base(ownsHandle)
-    {
-        SetHandle(handle);
-    }
 
     protected override bool ReleaseHandle()
     {

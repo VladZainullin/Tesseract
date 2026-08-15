@@ -533,72 +533,72 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessPageIteratorDelete")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void TessPageIteratorDelete(nint iterator);
+    public static partial void TessPageIteratorDelete(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessPageIteratorCopy")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessPageIteratorCopy(nint iterator);
+    public static partial nint TessPageIteratorCopy(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessPageIteratorBegin")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void TessPageIteratorBegin(nint iterator);
+    public static partial void TessPageIteratorBegin(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessPageIteratorNext")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(TesseractBoolMarshaller))]
-    public static partial bool TessPageIteratorNext(nint iterator, PageIteratorLevel level);
+    public static partial bool TessPageIteratorNext(SafeHandle iterator, PageIteratorLevel level);
 
     [LibraryImport(LibraryName, EntryPoint = "TessPageIteratorIsAtBeginningOf")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(TesseractBoolMarshaller))]
-    public static partial bool TessPageIteratorIsAtBeginningOf(nint iterator, PageIteratorLevel level);
+    public static partial bool TessPageIteratorIsAtBeginningOf(SafeHandle iterator, PageIteratorLevel level);
 
     [LibraryImport(LibraryName, EntryPoint = "TessPageIteratorIsAtFinalElement")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(TesseractBoolMarshaller))]
-    public static partial bool TessPageIteratorIsAtFinalElement(nint iterator, PageIteratorLevel level,
+    public static partial bool TessPageIteratorIsAtFinalElement(SafeHandle iterator, PageIteratorLevel level,
         PageIteratorLevel element);
 
     [LibraryImport(LibraryName, EntryPoint = "TessPageIteratorBoundingBox")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(TesseractBoolMarshaller))]
-    public static partial bool TessPageIteratorBoundingBox(nint iterator, PageIteratorLevel level,
+    public static partial bool TessPageIteratorBoundingBox(SafeHandle iterator, PageIteratorLevel level,
         out int left, out int top, out int right, out int bottom);
 
     [LibraryImport(LibraryName, EntryPoint = "TessPageIteratorBlockType")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial PolygonBlockType TessPageIteratorBlockType(nint iterator);
+    public static partial PolygonBlockType TessPageIteratorBlockType(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessPageIteratorGetBinaryImage")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessPageIteratorGetBinaryImage(nint iterator, PageIteratorLevel level);
+    public static partial nint TessPageIteratorGetBinaryImage(SafeHandle iterator, PageIteratorLevel level);
 
     [LibraryImport(LibraryName, EntryPoint = "TessPageIteratorGetImage")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessPageIteratorGetImage(nint iterator, PageIteratorLevel level, int padding,
+    public static partial nint TessPageIteratorGetImage(SafeHandle iterator, PageIteratorLevel level, int padding,
         nint originalImagePtr, out int left, out int top);
 
     [LibraryImport(LibraryName, EntryPoint = "TessPageIteratorBaseline")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(TesseractBoolMarshaller))]
-    public static partial bool TessPageIteratorBaseline(nint iterator, PageIteratorLevel level, out int x1,
+    public static partial bool TessPageIteratorBaseline(SafeHandle iterator, PageIteratorLevel level, out int x1,
         out int y1, out int x2, out int y2);
 
     [LibraryImport(LibraryName, EntryPoint = "TessPageIteratorOrientation")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial void TessPageIteratorOrientation(
-        nint iterator,
+        SafeHandle iterator,
         out PageOrientation pageOrientation,
         out WritingDirection writingDirection,
         out TextLineOrder textLineOrder,
@@ -608,7 +608,7 @@ internal static partial class TesseractNative
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial void TessPageIteratorParagraphInfo(
-        nint iterator,
+        SafeHandle iterator,
         out ParagraphJustification justification,
         [MarshalAs(UnmanagedType.Bool)] out bool isListItem,
         [MarshalAs(UnmanagedType.Bool)] out bool isCrown,
@@ -617,56 +617,56 @@ internal static partial class TesseractNative
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorDelete")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial void TessResultIteratorDelete(nint iterator);
+    public static partial void TessResultIteratorDelete(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorCopy")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessResultIteratorCopy(nint iterator);
+    public static partial nint TessResultIteratorCopy(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorGetPageIterator")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessResultIteratorGetPageIterator(nint iterator);
+    public static partial nint TessResultIteratorGetPageIterator(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorGetPageIteratorConst")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessResultIteratorGetPageIteratorConst(nint iterator);
+    public static partial nint TessResultIteratorGetPageIteratorConst(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorGetChoiceIterator")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessResultIteratorGetChoiceIterator(nint iterator);
+    public static partial nint TessResultIteratorGetChoiceIterator(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorNext")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(TesseractBoolMarshaller))]
-    public static partial bool TessResultIteratorNext(nint iterator, PageIteratorLevel level);
+    public static partial bool TessResultIteratorNext(SafeHandle iterator, PageIteratorLevel level);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorGetUTF8Text")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial nint TessResultIteratorGetUtf8Text(nint iterator, PageIteratorLevel level);
+    public static partial nint TessResultIteratorGetUtf8Text(SafeHandle iterator, PageIteratorLevel level);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorConfidence")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial float TessResultIteratorConfidence(nint iterator, PageIteratorLevel level);
+    public static partial float TessResultIteratorConfidence(SafeHandle iterator, PageIteratorLevel level);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorWordRecognitionLanguage",
         StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial string? TessResultIteratorWordRecognitionLanguage(nint iterator);
+    public static partial string? TessResultIteratorWordRecognitionLanguage(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorWordFontAttributes",
         StringMarshalling = StringMarshalling.Utf8)]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial string? TessResultIteratorWordFontAttributes(
-        nint iterator,
+        SafeHandle iterator,
         [MarshalAs(UnmanagedType.Bool)] out bool isBold,
         [MarshalAs(UnmanagedType.Bool)] out bool isItalic,
         [MarshalAs(UnmanagedType.Bool)] out bool isUnderlined,
@@ -680,31 +680,31 @@ internal static partial class TesseractNative
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(TesseractBoolMarshaller))]
-    public static partial bool TessResultIteratorWordIsFromDictionary(nint iterator);
+    public static partial bool TessResultIteratorWordIsFromDictionary(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorWordIsNumeric")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(TesseractBoolMarshaller))]
-    public static partial bool TessResultIteratorWordIsNumeric(nint iterator);
+    public static partial bool TessResultIteratorWordIsNumeric(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorSymbolIsSuperscript")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(TesseractBoolMarshaller))]
-    public static partial bool TessResultIteratorSymbolIsSuperscript(nint iterator);
+    public static partial bool TessResultIteratorSymbolIsSuperscript(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorSymbolIsSubscript")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(TesseractBoolMarshaller))]
-    public static partial bool TessResultIteratorSymbolIsSubscript(nint iterator);
+    public static partial bool TessResultIteratorSymbolIsSubscript(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessResultIteratorSymbolIsDropcap")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]
     [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [return: MarshalUsing(typeof(TesseractBoolMarshaller))]
-    public static partial bool TessResultIteratorSymbolIsDropcap(nint iterator);
+    public static partial bool TessResultIteratorSymbolIsDropCap(SafeHandle iterator);
 
     [LibraryImport(LibraryName, EntryPoint = "TessChoiceIteratorDelete")]
     [DefaultDllImportSearchPaths(DefaultDllImportSearchPath)]

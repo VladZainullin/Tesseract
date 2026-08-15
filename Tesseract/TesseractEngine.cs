@@ -429,14 +429,14 @@ public sealed class TesseractEngine : IDisposable, ITesseractEngine
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
         var iterator = TesseractNative.TessBaseApiGetIterator(Handle);
-        return new TesseractResultIterator(iterator);
+        return new TesseractResultIterator(new TesseractResultIteratorSafeHandle(iterator, true));
     }
 
     public ITesseractPageIterator AnalyzeLayout()
     {
         ObjectDisposedException.ThrowIf(_disposed, this);
         var iterator = TesseractNative.TessBaseApiAnalyseLayout(Handle);
-        return new TesseractPageIterator(iterator, false);
+        return new TesseractPageIterator(new TesseractResultIteratorSafeHandle(iterator, false));
     }
 
     public bool TryGetTextDirection(out int outOffset, out float slope)

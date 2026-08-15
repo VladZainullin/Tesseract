@@ -2,10 +2,8 @@ using Leptonica.Contracts;
 
 namespace Tesseract.Contracts;
 
-public interface ITesseractPageIterator : IDisposable
+public interface ITesseractPageIterator : IDisposable, IHasSafeHandle
 {
-    nint Handle { get; }
-
     IPix GetBinaryImage(PageIteratorLevel level);
 
     IPix GetImage(PageIteratorLevel level, int padding, IPix originalImage, out int left, out int top);

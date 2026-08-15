@@ -8,9 +8,9 @@ public sealed class TesseractChoiceIterator : IDisposable, ITesseractChoiceItera
     private readonly TesseractChoiceIteratorSafeHandle _handle;
     private volatile bool _disposed;
 
-    public TesseractChoiceIterator(nint handle)
+    public TesseractChoiceIterator(TesseractChoiceIteratorSafeHandle handle)
     {
-        _handle = new TesseractChoiceIteratorSafeHandle(handle, true);
+        _handle = handle;
     }
 
     public bool TryNext()

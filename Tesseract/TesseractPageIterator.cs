@@ -1,4 +1,5 @@
 using System;
+using System.Runtime.InteropServices;
 using Leptonica;
 using Leptonica.Contracts;
 using Tesseract.Contracts;
@@ -7,18 +8,15 @@ namespace Tesseract;
 
 public class TesseractPageIterator : ITesseractPageIterator
 {
-    private readonly bool _ownsHandle;
     private volatile bool _disposed;
 
-    public TesseractPageIterator(nint handle, bool ownsHandle)
+    public TesseractPageIterator(TesseractPageIteratorSafeHandle handle)
     {
-        if (handle <= 0) throw new ArgumentOutOfRangeException(nameof(handle));
-        
-        _ownsHandle = ownsHandle;
+        ArgumentNullException.ThrowIfNull(handle);
         Handle = handle;
     }
 
-    public nint Handle { get; private set; }
+    public SafeHandle Handle { get; }
 
     protected bool Disposed => _disposed;
 
@@ -40,8 +38,8 @@ public class TesseractPageIterator : ITesseractPageIterator
     {
         ObjectDisposedException.ThrowIf(Disposed, this);
         var pixPtr = TesseractNative.TessPageIteratorGetBinaryImage(Handle, level);
-        return pixPtr == 0 
-            ? throw new InvalidOperationException("TessPageIteratorGetBinaryImage returned a null pointer.") 
+        return pixPtr == 0
+            ? throw new InvalidOperationException("TessPageIteratorGetBinaryImage returned a null pointer.")
             : Pix.FromHandle(pixPtr);
     }
 
@@ -56,6 +54,7 @@ public class TesseractPageIterator : ITesseractPageIterator
             throw new InvalidOperationException(
                 "TessPageIteratorGetImage returned a null pointer.");
         }
+
         return Pix.FromHandle(pixPtr);
     }
 
@@ -108,37 +107,21 @@ public class TesseractPageIterator : ITesseractPageIterator
     {
         ObjectDisposedException.ThrowIf(Disposed, this);
         var pageIteratorPtr = TesseractNative.TessPageIteratorCopy(Handle);
-        return pageIteratorPtr == 0 
-            ? throw new InvalidOperationException("TessPageIteratorCopy returned a null pointer.") 
-            : new TesseractPageIterator(pageIteratorPtr, true);
+        return pageIteratorPtr == 0
+            ? throw new InvalidOperationException("TessPageIteratorCopy returned a null pointer.")
+            : new TesseractPageIterator(new TesseractPageIteratorSafeHandle(pageIteratorPtr, false));
     }
 
-    protected virtual void Dispose(bool _)
+    protected virtual void Dispose(bool disposing)
     {
-        if (Disposed) return;
-
-        if (_ownsHandle && Handle != nint.Zero)
-        {
-            ReleaseHandle();
-            Handle = nint.Zero;
-        }
-        
+        if (_disposed) return;
         _disposed = true;
-    }
-
-    protected virtual void ReleaseHandle()
-    {
-        TesseractNative.TessPageIteratorDelete(Handle);
+        Handle.Dispose();
     }
 
     public void Dispose()
     {
         Dispose(true);
         GC.SuppressFinalize(this);
-    }
-    
-    ~TesseractPageIterator()
-    {
-        Dispose(false);
     }
 }

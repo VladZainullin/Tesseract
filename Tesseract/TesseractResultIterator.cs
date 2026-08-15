@@ -7,7 +7,7 @@ namespace Tesseract;
 public sealed class TesseractResultIterator
     : TesseractPageIterator, ITesseractResultIterator
 {
-    public TesseractResultIterator(nint handle) : base(handle, true)
+    public TesseractResultIterator(TesseractResultIteratorSafeHandle handle) : base(handle)
     {
     }
     
@@ -17,7 +17,7 @@ public sealed class TesseractResultIterator
         var pointer = TesseractNative.TessResultIteratorCopy(Handle);
         return pointer == 0
             ? throw new InvalidOperationException("TessResultIteratorCopy returned a null pointer.")
-            : new TesseractResultIterator(pointer);
+            : new TesseractResultIterator(new TesseractResultIteratorSafeHandle(pointer, false));
     }
 
     public ITesseractPageIterator GetPageIterator()
@@ -26,7 +26,7 @@ public sealed class TesseractResultIterator
         var pageIteratorPtr = TesseractNative.TessResultIteratorGetPageIterator(Handle);
         return pageIteratorPtr == 0
             ? throw new InvalidOperationException("TessResultIteratorGetPageIterator returned a null pointer.")
-            : new TesseractPageIterator(pageIteratorPtr, false);
+            : new TesseractPageIterator(new TesseractResultIteratorSafeHandle(pageIteratorPtr, false));
     }
 
     public ITesseractPageIterator GetPageIteratorConst()
@@ -36,7 +36,7 @@ public sealed class TesseractResultIterator
         var pointer = TesseractNative.TessResultIteratorGetPageIteratorConst(Handle);
         return pointer == 0
             ? throw new InvalidOperationException("TessResultIteratorGetPageIteratorConst returned a null pointer.")
-            : new TesseractPageIterator(pointer, false);
+            : new TesseractPageIterator(new TesseractResultIteratorSafeHandle(pointer, false));
     }
 
     public ITesseractChoiceIterator GetChoiceIterator()
@@ -46,7 +46,7 @@ public sealed class TesseractResultIterator
         var pointer = TesseractNative.TessResultIteratorGetChoiceIterator(Handle);
         return pointer == 0
             ? throw new InvalidOperationException("TessResultIteratorGetChoiceIterator returned a null pointer.")
-            : new TesseractChoiceIterator(pointer);
+            : new TesseractChoiceIterator(new TesseractChoiceIteratorSafeHandle(pointer, false));
     }
 
     public override bool TryNext(PageIteratorLevel level)
@@ -119,11 +119,6 @@ public sealed class TesseractResultIterator
     public bool IsSymbolDropCap()
     {
         ObjectDisposedException.ThrowIf(Disposed, this);
-        return TesseractNative.TessResultIteratorSymbolIsDropcap(Handle);
-    }
-
-    protected override void ReleaseHandle()
-    {
-        TesseractNative.TessResultIteratorDelete(Handle);
+        return TesseractNative.TessResultIteratorSymbolIsDropCap(Handle);
     }
 }

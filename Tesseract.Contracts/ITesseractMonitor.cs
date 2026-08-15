@@ -1,6 +1,8 @@
 namespace Tesseract.Contracts;
 
-public interface ITesseractMonitor
+public interface ITesseractMonitor : IHasSafeHandle, IDisposable
 {
-    nint Handle { get; }
+    int Progress { get; }
+
+    void SetDeadline(int milliseconds);
 }

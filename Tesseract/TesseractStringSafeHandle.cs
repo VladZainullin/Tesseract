@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices;
 using Microsoft.Win32.SafeHandles;
 
 namespace Tesseract;
@@ -6,6 +7,11 @@ public sealed class TesseractStringSafeHandle : SafeHandleZeroOrMinusOneIsInvali
 {
     public TesseractStringSafeHandle() : base(true)
     {
+    }
+
+    internal string? ToManagedString()
+    {
+        return IsInvalid ? null : Marshal.PtrToStringUTF8(handle);
     }
 
     protected override bool ReleaseHandle()
